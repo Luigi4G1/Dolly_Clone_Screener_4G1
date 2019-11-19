@@ -1,0 +1,12 @@
+#NICAD_ROOT_FULLPATH:#
+C:\cygwin64\home\<YOURPCUSERNAME>\NiCad-5.0\
+#NICAD_ANALYZEDSYSTEMS_ROOT_FOLDER_NAME:#
+systems
+#NICAD_SYSTEM_VERSION_COMMIT:#
+d97b6a0685d59143372bb392ab591dd8dd840b61
+#NICAD_CLONE_CLASSES_FILE:#
+Dnsjava_functions-blind-clones-0.30-classes.xml
+#NICAD_CLONE_LINES_FILE:#
+Dnsjava_functions-blind-clones-0.30-classes-withsource.html
+#NICAD_CLONE_PAIRS_FILE:#
+Dnsjava_functions-blind-clones-0.30.xml

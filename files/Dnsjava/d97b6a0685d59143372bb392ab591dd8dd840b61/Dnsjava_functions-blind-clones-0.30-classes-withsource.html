@@ -1,0 +1,3763 @@
+<html>
+<head>
+<style type="text/css">
+body {font-family:Arial}
+table {background-color:white; border:0px solid white; width:95%; margin-left:auto; margin-right: auto}
+td {background-color:#b0c4de; padding:16px; border:4px solid white}
+pre {background-color:white; padding:4px}
+</style>
+<title>
+NiCad Clone Report
+</title>
+</head>
+<body>
+<h2>
+NiCad Clone Report
+</h2>
+System: Dnsjava
+<br>
+<br>Granularity: functions-blind
+<br>Max difference threshold: 30%
+<br>Clone size: 10 - 2500 lines
+<br>
+<br>Total functions-blind: 2183
+<br>Clone pairs found: 217
+<br>
+<br>LCS compares: 70412 &nbsp;&nbsp;&nbsp; CPU time: 0 min 0.0 sec
+<br>
+<br>Number of  classes: 54
+<br>
+<h3>Clone class 1, 2 fragments, nominal size 10 lines, similarity 100%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 602 - 608 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/jnamed.java
+<pre>
+public void
+addTCP(final InetAddress addr, final int port) {
+	Thread t;
+	t = new Thread(new Runnable() {
+			public void run() {serveTCP(addr, port);}});
+	t.start();
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 610 - 616 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/jnamed.java
+<pre>
+public void
+addUDP(final InetAddress addr, final int port) {
+	Thread t;
+	t = new Thread(new Runnable() {
+			public void run() {serveUDP(addr, port);}});
+	t.start();
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 2, 3 fragments, nominal size 10 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 41 - 53 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/CAARecord.java
+<pre>
+public
+CAARecord(Name name, int dclass, long ttl, int flags, String tag, String value)
+{
+	super(name, Type.CAA, dclass, ttl);
+	this.flags = checkU8("flags", flags);
+	try {
+		this.tag = byteArrayFromString(tag);
+		this.value = byteArrayFromString(value);
+	}
+	catch (TextParseException e) {
+		throw new IllegalArgumentException(e.getMessage());
+	}
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 64 - 78 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/GPOSRecord.java
+<pre>
+public
+GPOSRecord(Name name, int dclass, long ttl, String longitude, String latitude,
+	   String altitude)
+{
+	super(name, Type.GPOS, dclass, ttl);
+	try {
+		this.longitude = byteArrayFromString(longitude);
+		this.latitude = byteArrayFromString(latitude);
+		validate(getLongitude(), getLatitude());
+		this.altitude = byteArrayFromString(altitude);
+	}
+	catch (TextParseException e) {
+		throw new IllegalArgumentException(e.getMessage());
+	}
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 39 - 52 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/URIRecord.java
+<pre>
+public
+URIRecord(Name name, int dclass, long ttl, int priority,
+	  int weight, String target)
+{
+	super(name, Type.URI, dclass, ttl);
+	this.priority = checkU16("priority", priority);
+	this.weight = checkU16("weight", weight);
+	try {
+		this.target = byteArrayFromString(target);
+	}
+	catch (TextParseException e) {
+		throw new IllegalArgumentException(e.getMessage());
+	}
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 3, 2 fragments, nominal size 30 lines, similarity 96%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 257 - 286 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Cache.java
+<pre>
+private synchronized void
+addElement(Name name, Element element) {
+	Object types = data.get(name);
+	if (types == null) {
+		data.put(name, element);
+		return;
+	}
+	int type = element.getType();
+	if (types instanceof List) {
+		List list = (List) types;
+		for (int i = 0; i &lt; list.size(); i++) {
+			Element elt = (Element) list.get(i);
+			if (elt.getType() == type) {
+				list.set(i, element);
+				return;
+			}
+		}
+		list.add(element);
+	} else {
+		Element elt = (Element) types;
+		if (elt.getType() == type)
+			data.put(name, element);
+		else {
+			LinkedList list = new LinkedList();
+			list.add(elt);
+			list.add(element);
+			data.put(name, list);
+		}
+	}
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 272 - 303 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Zone.java
+<pre>
+private synchronized void
+addRRset(Name name, RRset rrset) {
+	if (!hasWild &amp;&amp; name.isWild())
+		hasWild = true;
+	Object types = data.get(name);
+	if (types == null) {
+		data.put(name, rrset);
+		return;
+	}
+	int rtype = rrset.getType();
+	if (types instanceof List) {
+		List list = (List) types;
+		for (int i = 0; i &lt; list.size(); i++) {
+			RRset set = (RRset) list.get(i);
+			if (set.getType() == rtype) {
+				list.set(i, rrset);
+				return;
+			}
+		}
+		list.add(rrset);
+	} else {
+		RRset set = (RRset) types;
+		if (set.getType() == rtype)
+			data.put(name, rrset);
+		else {
+			LinkedList list = new LinkedList();
+			list.add(set);
+			list.add(rrset);
+			data.put(name, list);
+		}
+	}
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 4, 2 fragments, nominal size 22 lines, similarity 100%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 288 - 311 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Cache.java
+<pre>
+private synchronized void
+removeElement(Name name, int type) {
+	Object types = data.get(name);
+	if (types == null) {
+		return;
+	}
+	if (types instanceof List) {
+		List list = (List) types;
+		for (int i = 0; i &lt; list.size(); i++) {
+			Element elt = (Element) list.get(i);
+			if (elt.getType() == type) {
+				list.remove(i);
+				if (list.size() == 0)
+					data.remove(name);
+				return;
+			}
+		}
+	} else {
+		Element elt = (Element) types;
+		if (elt.getType() != type)
+			return;
+		data.remove(name);
+	}
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 305 - 328 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Zone.java
+<pre>
+private synchronized void
+removeRRset(Name name, int type) {
+	Object types = data.get(name);
+	if (types == null) {
+		return;
+	}
+	if (types instanceof List) {
+		List list = (List) types;
+		for (int i = 0; i &lt; list.size(); i++) {
+			RRset set = (RRset) list.get(i);
+			if (set.getType() == type) {
+				list.remove(i);
+				if (list.size() == 0)
+					data.remove(name);
+				return;
+			}
+		}
+	} else {
+		RRset set = (RRset) types;
+		if (set.getType() != type)
+			return;
+		data.remove(name);
+	}
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 5, 6 fragments, nominal size 15 lines, similarity 72%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 164 - 182 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/CERTRecord.java
+<pre>
+String
+rrToString() {
+	StringBuffer sb = new StringBuffer();
+	sb.append (certType);
+	sb.append (" ");
+	sb.append (keyTag);
+	sb.append (" ");
+	sb.append (alg);
+	if (cert != null) {
+		if (Options.check("multiline")) {
+			sb.append(" (\n");
+			sb.append(base64.formatString(cert, 64, "\t", true));
+		} else {
+			sb.append(" ");
+			sb.append(base64.toString(cert));
+		}
+	}
+	return sb.toString();
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 69 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/KEYBase.java
+<pre>
+String
+rrToString() {
+	StringBuffer sb = new StringBuffer();
+	sb.append(flags);
+	sb.append(" ");
+	sb.append(proto);
+	sb.append(" ");
+	sb.append(alg);
+	if (key != null) {
+		if (Options.check("multiline")) {
+			sb.append(" (\n");
+			sb.append(base64.formatString(key, 64, "\t", true));
+			sb.append(" ; key_tag = ");
+			sb.append(getFootprint());
+		} else {
+			sb.append(" ");
+			sb.append(base64.toString(key));
+		}
+	}
+	return sb.toString();
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 103 - 117 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/DSRecord.java
+<pre>
+String
+rrToString() {
+	StringBuffer sb = new StringBuffer();
+	sb.append(footprint);
+	sb.append(" ");
+	sb.append(alg);
+	sb.append(" ");
+	sb.append(digestid);
+	if (digest != null) {
+		sb.append(" ");
+		sb.append(base16.toString(digest));
+	}
+
+	return sb.toString();
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 74 - 88 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/DLVRecord.java
+<pre>
+String
+rrToString() {
+	StringBuffer sb = new StringBuffer();
+	sb.append(footprint);
+	sb.append(" ");
+	sb.append(alg);
+	sb.append(" ");
+	sb.append(digestid);
+	if (digest != null) {
+		sb.append(" ");
+		sb.append(base16.toString(digest));
+	}
+
+	return sb.toString();
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 112 - 124 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/SMIMEARecord.java
+<pre>
+String
+rrToString() {
+	StringBuffer sb = new StringBuffer();
+	sb.append(certificateUsage);
+	sb.append(" ");
+	sb.append(selector);
+	sb.append(" ");
+	sb.append(matchingType);
+	sb.append(" ");
+	sb.append(base16.toString(certificateAssociationData));
+
+	return sb.toString();
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 110 - 122 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/TLSARecord.java
+<pre>
+String
+rrToString() {
+	StringBuffer sb = new StringBuffer();
+	sb.append(certificateUsage);
+	sb.append(" ");
+	sb.append(selector);
+	sb.append(" ");
+	sb.append(matchingType);
+	sb.append(" ");
+	sb.append(base16.toString(certificateAssociationData));
+
+	return sb.toString();
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 6, 2 fragments, nominal size 23 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 98 - 121 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/IPSECKEYRecord.java
+<pre>
+void
+rrFromWire(DNSInput in) throws IOException {
+	precedence = in.readU8();
+	gatewayType = in.readU8();
+	algorithmType = in.readU8();
+	switch (gatewayType) {
+	case Gateway.None:
+		gateway = null;
+		break;
+	case Gateway.IPv4:
+		gateway = InetAddress.getByAddress(in.readByteArray(4));
+		break;
+	case Gateway.IPv6:
+		gateway = InetAddress.getByAddress(in.readByteArray(16));
+		break;
+	case Gateway.Name:
+		gateway = new Name(in);
+		break;
+	default:
+		throw new WireParseException("invalid gateway type");
+	}
+	if (in.remaining() &gt; 0)
+		key = in.readByteArray();
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 123 - 148 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/IPSECKEYRecord.java
+<pre>
+void
+rdataFromString(Tokenizer st, Name origin) throws IOException {
+	precedence = st.getUInt8();
+	gatewayType = st.getUInt8();
+	algorithmType = st.getUInt8();
+	switch (gatewayType) {
+	case Gateway.None:
+		String s = st.getString();
+		if (!s.equals("."))
+			throw new TextParseException("invalid gateway format");
+		gateway = null;
+		break;
+	case Gateway.IPv4:
+		gateway = st.getAddress(Address.IPv4);
+		break;
+	case Gateway.IPv6:
+		gateway = st.getAddress(Address.IPv6);
+		break;
+	case Gateway.Name:
+		gateway = st.getName(origin);
+		break;
+	default:
+		throw new WireParseException("invalid gateway type");
+	}
+	key = st.getBase64(false);
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 7, 2 fragments, nominal size 10 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 170 - 180 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Lookup.java
+<pre>
+public static synchronized void
+setDefaultSearchPath(String [] domains) throws TextParseException {
+	if (domains == null) {
+		defaultSearchPath = null;
+		return;
+	}
+	Name [] newdomains = new Name[domains.length];
+	for (int i = 0; i &lt; domains.length; i++)
+		newdomains[i] = Name.fromString(domains[i], Name.root);
+	defaultSearchPath = newdomains;
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 339 - 349 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Lookup.java
+<pre>
+public void
+setSearchPath(String [] domains) throws TextParseException {
+	if (domains == null) {
+		this.searchPath = null;
+		return;
+	}
+	Name [] newdomains = new Name[domains.length];
+	for (int i = 0; i &lt; domains.length; i++)
+		newdomains[i] = Name.fromString(domains[i], Name.root);
+	this.searchPath = newdomains;
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 8, 2 fragments, nominal size 13 lines, similarity 85%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 92 - 108 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/NSEC3PARAMRecord.java
+<pre>
+void
+rdataFromString(Tokenizer st, Name origin) throws IOException
+{
+	hashAlg = st.getUInt8();
+	flags = st.getUInt8();
+	iterations = st.getUInt16();
+
+	String s = st.getString();
+	if (s.equals("-"))
+		salt = null;
+	else {
+		st.unget();
+		salt = st.getHexString();
+		if (salt.length &gt; 255)
+			throw st.exception("salt value too long");
+	}
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 137 - 155 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/NSEC3Record.java
+<pre>
+void
+rdataFromString(Tokenizer st, Name origin) throws IOException {
+	hashAlg = st.getUInt8();
+	flags = st.getUInt8();
+	iterations = st.getUInt16();
+
+	String s = st.getString();
+	if (s.equals("-"))
+		salt = null;
+	else {
+		st.unget();
+		salt = st.getHexString();
+		if (salt.length &gt; 255)
+			throw st.exception("salt value too long");
+	}
+
+	next = st.getBase32String(b32);
+	types = new TypeBitmap(st);
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 9, 2 fragments, nominal size 11 lines, similarity 72%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 113 - 128 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/TCPClient.java
+<pre>
+static byte []
+sendrecv(SocketAddress local, SocketAddress remote, byte [] data, long endTime)
+throws IOException
+{
+	TCPClient client = new TCPClient(endTime);
+	try {
+		if (local != null)
+			client.bind(local);
+		client.connect(remote);
+		client.send(data);
+		return client.recv();
+	}
+	finally {
+		client.cleanup();
+	}
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 142 - 157 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/UDPClient.java
+<pre>
+static byte []
+sendrecv(SocketAddress local, SocketAddress remote, byte [] data, int max,
+	 long endTime)
+throws IOException
+{
+	UDPClient client = new UDPClient(endTime);
+	try {
+		client.bind(local);
+		client.connect(remote);
+		client.send(data);
+		return client.recv(max);
+	}
+	finally {
+		client.cleanup();
+	}
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 10, 2 fragments, nominal size 10 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 63 - 76 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/TKEYRecord.java
+<pre>
+public
+TKEYRecord(Name name, int dclass, long ttl, Name alg,
+	   Date timeInception, Date timeExpire, int mode, int error,
+	   byte [] key, byte other[])
+{
+	super(name, Type.TKEY, dclass, ttl);
+	this.alg = checkName("alg", alg);
+	this.timeInception = timeInception;
+	this.timeExpire = timeExpire;
+	this.mode = checkU16("mode", mode);
+	this.error = checkU16("error", error);
+	this.key = key;
+	this.other = other;
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 53 - 66 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/TSIGRecord.java
+<pre>
+public
+TSIGRecord(Name name, int dclass, long ttl, Name alg, Date timeSigned,
+	   int fudge, byte [] signature, int originalID, int error,
+	   byte other[])
+{
+	super(name, Type.TSIG, dclass, ttl);
+	this.alg = checkName("alg", alg);
+	this.timeSigned = timeSigned;
+	this.fudge = checkU16("fudge", fudge);
+	this.signature = signature;
+	this.originalID = checkU16("originalID", originalID);
+	this.error = checkU16("error", error);
+	this.other = other;
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 11, 2 fragments, nominal size 10 lines, similarity 80%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 606 - 619 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Tokenizer.java
+<pre>
+public byte []
+getBase64(boolean required) throws IOException {
+	String s = remainingStrings();
+	if (s == null) {
+		if (required)
+			throw exception("expected base64 encoded string");
+		else
+			return null;
+	}
+	byte [] array = base64.fromString(s);
+	if (array == null)
+		throw exception("invalid base64 encoding");
+	return array;
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 644 - 657 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Tokenizer.java
+<pre>
+public byte []
+getHex(boolean required) throws IOException {
+	String s = remainingStrings();
+	if (s == null) {
+		if (required)
+			throw exception("expected hex encoded string");
+		else
+			return null;
+	}
+	byte [] array = base16.fromString(s);
+	if (array == null)
+		throw exception("invalid hex encoding");
+	return array;
+}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 12, 2 fragments, nominal size 20 lines, similarity 95%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 79 - 103 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AAAARecordTest.java
+<pre>
+    public void test_ctor_4arg()
+    {
+	AAAARecord ar = new AAAARecord(m_an, DClass.IN, m_ttl, m_addr);
+	assertEquals(m_an, ar.getName());
+	assertEquals(Type.AAAA, ar.getType());
+	assertEquals(DClass.IN, ar.getDClass());
+	assertEquals(m_ttl, ar.getTTL());
+	assertEquals(m_addr, ar.getAddress());
+
+	// a relative name
+	try {
+	    new AAAARecord(m_rn, DClass.IN, m_ttl, m_addr);
+	    fail("RelativeNameException not thrown");
+	}
+	catch( RelativeNameException e ){}
+
+	// an IPv4 address
+	try {
+	    new AAAARecord(m_an, DClass.IN, m_ttl,
+			InetAddress.getByName("192.168.0.1"));
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){}
+	catch( UnknownHostException e ){ fail(e.getMessage()); }
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 79 - 103 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/ARecordTest.java
+<pre>
+    public void test_ctor_4arg()
+    {
+	ARecord ar = new ARecord(m_an, DClass.IN, m_ttl, m_addr);
+	assertEquals(m_an, ar.getName());
+	assertEquals(Type.A, ar.getType());
+	assertEquals(DClass.IN, ar.getDClass());
+	assertEquals(m_ttl, ar.getTTL());
+	assertEquals(m_addr, ar.getAddress());
+
+	// a relative name
+	try {
+	    new ARecord(m_rn, DClass.IN, m_ttl, m_addr);
+	    fail("RelativeNameException not thrown");
+	}
+	catch( RelativeNameException e ){}
+
+	// an IPv6 address
+	try {
+	    new ARecord(m_an, DClass.IN, m_ttl,
+			InetAddress.getByName("2001:0db8:85a3:08d3:1319:8a2e:0370:7334"));
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){}
+	catch( UnknownHostException e ){ fail(e.getMessage()); }
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 13, 4 fragments, nominal size 14 lines, similarity 71%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 115 - 132 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AAAARecordTest.java
+<pre>
+    public void test_rdataFromString() throws IOException
+    {
+	Tokenizer t = new Tokenizer(m_addr_string);
+	AAAARecord ar = new AAAARecord();
+
+	ar.rdataFromString(t, null);
+
+	assertEquals(m_addr, ar.getAddress());
+
+	// invalid address
+	t = new Tokenizer("193.160.232.1");
+	ar = new AAAARecord();
+	try {
+	    ar.rdataFromString(t, null);
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 108 - 124 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleNameBaseTest.java
+<pre>
+    public void test_rdataFromString() throws IOException
+    {
+	Name exp = Name.fromString("my.single.name.");
+
+	Tokenizer t = new Tokenizer("my.single.name.");
+	TestClass tc = new TestClass();
+	tc.rdataFromString(t, null);
+	assertEquals(exp, tc.getSingleName());
+
+	t = new Tokenizer("my.relative.name");
+	tc = new TestClass();
+	try {
+	    tc.rdataFromString(t, null);
+	    fail("RelativeNameException not thrown");
+	}
+	catch( RelativeNameException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 115 - 132 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/ARecordTest.java
+<pre>
+    public void test_rdataFromString() throws IOException
+    {
+	Tokenizer t = new Tokenizer(m_addr_string);
+	ARecord ar = new ARecord();
+
+	ar.rdataFromString(t, null);
+
+	assertEquals(m_addr, ar.getAddress());
+
+	// invalid address
+	t = new Tokenizer("193.160.232");
+	ar = new ARecord();
+	try {
+	    ar.rdataFromString(t, null);
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 154 - 172 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/U16NameBaseTest.java
+<pre>
+    public void test_rdataFromString() throws IOException
+    {
+	Name exp = Name.fromString("My.Single.Name.");
+
+	Tokenizer t = new Tokenizer(0x19A2 + " My.Single.Name.");
+	TestClass tc = new TestClass();
+	tc.rdataFromString(t, null);
+
+	assertEquals(0x19A2, tc.getU16Field());
+	assertEquals(exp, tc.getNameField());
+
+	t = new Tokenizer("10 My.Relative.Name");
+	tc = new TestClass();
+	try {
+	    tc.rdataFromString(t, null);
+	    fail("RelativeNameException not thrown");
+	}
+	catch( RelativeNameException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 14, 2 fragments, nominal size 12 lines, similarity 100%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 282 - 296 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AddressTest.java
+<pre>
+    public void test_getByName_invalid() throws UnknownHostException
+    {
+	try {
+	    Address.getByName("example.invalid");
+	    fail("UnknownHostException not thrown");
+	}
+	catch( UnknownHostException e ){
+	}
+	try {
+	    Address.getByName("");
+	    fail("UnknownHostException not thrown");
+	}
+	catch( UnknownHostException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 316 - 330 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AddressTest.java
+<pre>
+    public void test_getAllByName_invalid() throws UnknownHostException
+    {
+	try {
+	    Address.getAllByName("example.invalid");
+	    fail("UnknownHostException not thrown");
+	}
+	catch( UnknownHostException e ){
+	}
+	try {
+	    Address.getAllByName("");
+	    fail("UnknownHostException not thrown");
+	}
+	catch( UnknownHostException e ){
+	}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 15, 4 fragments, nominal size 11 lines, similarity 91%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 49 - 61 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AFSDBRecordTest.java
+<pre>
+    public void test_ctor_5arg() throws TextParseException
+    {
+	Name n = Name.fromString("My.Name.");
+	Name m = Name.fromString("My.OtherName.");
+
+	AFSDBRecord d = new AFSDBRecord(n, DClass.IN, 0xABCDEL, 0xF1, m);
+	assertEquals(n, d.getName());
+	assertEquals(Type.AFSDB, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(0xF1, d.getSubtype());
+	assertEquals(m, d.getHost());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 62 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/KXRecordTest.java
+<pre>
+    public void test_ctor_5arg() throws TextParseException
+    {
+	Name n = Name.fromString("My.Name.");
+	Name m = Name.fromString("My.OtherName.");
+
+	KXRecord d = new KXRecord(n, DClass.IN, 0xABCDEL, 0xF1, m);
+	assertEquals(n, d.getName());
+	assertEquals(Type.KX, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(0xF1, d.getPreference());
+	assertEquals(m, d.getTarget());
+	assertEquals(m, d.getAdditionalName());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 62 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MXRecordTest.java
+<pre>
+    public void test_ctor_5arg() throws TextParseException
+    {
+	Name n = Name.fromString("My.Name.");
+	Name m = Name.fromString("My.OtherName.");
+
+	MXRecord d = new MXRecord(n, DClass.IN, 0xABCDEL, 0xF1, m);
+	assertEquals(n, d.getName());
+	assertEquals(Type.MX, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(0xF1, d.getPriority());
+	assertEquals(m, d.getTarget());
+	assertEquals(m, d.getAdditionalName());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 61 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RTRecordTest.java
+<pre>
+    public void test_ctor_5arg() throws TextParseException
+    {
+	Name n = Name.fromString("My.Name.");
+	Name m = Name.fromString("My.OtherName.");
+
+	RTRecord d = new RTRecord(n, DClass.IN, 0xABCDEL, 0xF1, m);
+	assertEquals(n, d.getName());
+	assertEquals(Type.RT, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(0xF1, d.getPreference());
+	assertEquals(m, d.getIntermediateHost());
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 16, 3 fragments, nominal size 16 lines, similarity 100%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 111 - 131 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	protected void setUp() throws TextParseException,
+				      UnknownHostException
+	{
+	    m_an = Name.fromString("My.Absolute.Name.");
+	    m_rn = Name.fromString("My.Relative.Name");
+	    m_ttl = 0x13579;
+	    m_addr4_string = "193.160.232.5";
+	    m_addr4 = InetAddress.getByName(m_addr4_string);
+	    m_addr4_bytes = m_addr4.getAddress();
+	    
+	    m_addr6_string = "2001:db8:85a3:8d3:1319:8a2e:370:7334";
+	    m_addr6 = InetAddress.getByName(m_addr6_string);
+	    m_addr6_bytes = m_addr6.getAddress();
+	    
+	    m_elements = new ArrayList(2);
+	    Element e = new Element(true, m_addr4, 12);
+	    m_elements.add(e);
+	    
+	    e = new Element(false, m_addr6, 64);
+	    m_elements.add(e);
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 526 - 546 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	protected void setUp() throws TextParseException,
+				      UnknownHostException
+	{
+	    m_an = Name.fromString("My.Absolute.Name.");
+	    m_rn = Name.fromString("My.Relative.Name");
+	    m_ttl = 0x13579;
+	    m_addr4_string = "193.160.232.5";
+	    m_addr4 = InetAddress.getByName(m_addr4_string);
+	    m_addr4_bytes = m_addr4.getAddress();
+	    
+	    m_addr6_string = "2001:db8:85a3:8d3:1319:8a2e:370:7334";
+	    m_addr6 = InetAddress.getByName(m_addr6_string);
+	    m_addr6_bytes = m_addr6.getAddress();
+	    
+	    m_elements = new ArrayList(2);
+	    Element e = new Element(true, m_addr4, 12);
+	    m_elements.add(e);
+	    
+	    e = new Element(false, m_addr6, 64);
+	    m_elements.add(e);
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 568 - 588 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	protected void setUp() throws TextParseException,
+				      UnknownHostException
+	{
+	    m_an = Name.fromString("My.Absolute.Name.");
+	    m_rn = Name.fromString("My.Relative.Name");
+	    m_ttl = 0x13579;
+	    m_addr4_string = "193.160.232.5";
+	    m_addr4 = InetAddress.getByName(m_addr4_string);
+	    m_addr4_bytes = m_addr4.getAddress();
+	    
+	    m_addr6_string = "2001:db8:85a3:8d3:1319:8a2e:370:7334";
+	    m_addr6 = InetAddress.getByName(m_addr6_string);
+	    m_addr6_bytes = m_addr6.getAddress();
+	    
+	    m_elements = new ArrayList(2);
+	    Element e = new Element(true, m_addr4, 12);
+	    m_elements.add(e);
+	    
+	    e = new Element(false, m_addr6, 64);
+	    m_elements.add(e);
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 17, 2 fragments, nominal size 10 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 219 - 234 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	public void test_validIPv4_short_address() throws IOException
+	{
+	    byte[] raw = new byte[] { 0, 1, 20, (byte)0x83, 
+				      m_addr4_bytes[0], m_addr4_bytes[1],
+				      m_addr4_bytes[2] };
+	    
+	    DNSInput di = new DNSInput(raw);
+	    APLRecord ar = new APLRecord();
+	    ar.rrFromWire(di);
+	    
+	    InetAddress a = InetAddress.getByName("193.160.232.0");
+	    
+	    ArrayList exp = new ArrayList();
+	    exp.add(new Element(true, a, 20));
+	    assertEquals(exp, ar.getElements());
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 266 - 284 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	public void test_multiple_validIPv4() throws IOException
+	{
+	    byte[] raw = new byte[] { 0, 1, 8, (byte)0x84, 
+				      m_addr4_bytes[0], m_addr4_bytes[1],
+				      m_addr4_bytes[2], m_addr4_bytes[3],
+				      0, 1, 30, (byte)0x4,
+				      m_addr4_bytes[0], m_addr4_bytes[1],
+				      m_addr4_bytes[2], m_addr4_bytes[3],
+	    };
+	    
+	    DNSInput di = new DNSInput(raw);
+	    APLRecord ar = new APLRecord();
+	    ar.rrFromWire(di);
+	    
+	    ArrayList exp = new ArrayList();
+	    exp.add(new Element(true, m_addr4, 8));
+	    exp.add(new Element(false, m_addr4, 30));
+	    assertEquals(exp, ar.getElements());
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 18, 6 fragments, nominal size 10 lines, similarity 90%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 236 - 249 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	public void test_invalid_IPv4_prefix() throws IOException
+	{
+	    byte[] raw = new byte[] { 0, 1, 33, (byte)0x84, 
+				      m_addr4_bytes[0], m_addr4_bytes[1],
+				      m_addr4_bytes[2], m_addr4_bytes[3] };
+	    
+	    DNSInput di = new DNSInput(raw);
+	    APLRecord ar = new APLRecord();
+	    try {
+		ar.rrFromWire(di);
+		fail("WireParseException not thrown");
+	    }
+	    catch( WireParseException e ){}
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 251 - 264 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	public void test_invalid_IPv4_length() throws IOException
+	{
+	    byte[] raw = new byte[] { 0, 1, 8, (byte)0x85, 
+				      m_addr4_bytes[0], m_addr4_bytes[1],
+				      m_addr4_bytes[2], m_addr4_bytes[3], 10 };
+	    
+	    DNSInput di = new DNSInput(raw);
+	    APLRecord ar = new APLRecord();
+	    try {
+		ar.rrFromWire(di);
+		fail("WireParseException not thrown");
+	    }
+	    catch( WireParseException e ){}
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 267 - 280 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java
+<pre>
+	public void test_latitude_toosmall() throws IOException
+	{
+	    byte[] raw = new byte[] { 5, '-', '8', '5', '.', '0',
+				      6, '-', '1', '9', '0', '.', '0',
+				      3, '0', '.', '0' };
+	    DNSInput in = new DNSInput(raw);
+
+	    GPOSRecord gr = new GPOSRecord();
+	    try {
+		gr.rrFromWire(in);
+		fail("WireParseException not thrown");
+	    }
+	    catch(WireParseException e){}
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 282 - 295 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java
+<pre>
+	public void test_latitude_toobig() throws IOException
+	{
+	    byte[] raw = new byte[] { 5, '-', '8', '5', '.', '0',
+				      6, '2', '1', '9', '0', '.', '0',
+				      3, '0', '.', '0' };
+	    DNSInput in = new DNSInput(raw);
+
+	    GPOSRecord gr = new GPOSRecord();
+	    try {
+		gr.rrFromWire(in);
+		fail("WireParseException not thrown");
+	    }
+	    catch(WireParseException e){}
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 252 - 265 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java
+<pre>
+	public void test_longitude_toobig() throws IOException
+	{
+	    byte[] raw = new byte[] { 5, '1', '8', '5', '.', '0',
+				      6, '1', '2', '3', '.', '0', '7',
+				      3, '0', '.', '0' };
+	    DNSInput in = new DNSInput(raw);
+
+	    GPOSRecord gr = new GPOSRecord();
+	    try {
+		gr.rrFromWire(in);
+		fail("WireParseException not thrown");
+	    }
+	    catch(WireParseException e){}
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 237 - 250 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java
+<pre>
+	public void test_longitude_toosmall() throws IOException
+	{
+	    byte[] raw = new byte[] { 5, '-', '9', '5', '.', '0',
+				      6, '1', '2', '3', '.', '0', '7',
+				      3, '0', '.', '0' };
+	    DNSInput in = new DNSInput(raw);
+	    
+	    GPOSRecord gr = new GPOSRecord();
+	    try {
+		gr.rrFromWire(in);
+		fail("WireParseException not thrown");
+	    }
+	    catch(WireParseException e){}
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 19, 3 fragments, nominal size 10 lines, similarity 80%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 637 - 651 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	public void test_address_with_embedded_zero() throws UnknownHostException
+	{
+	    InetAddress a = InetAddress.getByName("232.0.11.1");
+	    ArrayList elements = new ArrayList();
+	    elements.add(new Element(true, a, 31));
+	    
+	    APLRecord ar = new APLRecord(m_an, DClass.IN, m_ttl, elements);
+	    
+	    byte[] exp = new byte[] { 0, 1, 31, (byte)0x84, (byte)232, 0, 11, 1 };
+	    
+	    DNSOutput dout = new DNSOutput();
+	    
+	    ar.rrToWire(dout, null, true);
+	    assertTrue(Arrays.equals(exp, dout.toByteArray()));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 669 - 683 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	public void test_wildcard_address() throws UnknownHostException
+	{
+	    InetAddress a = InetAddress.getByName("0.0.0.0");
+	    ArrayList elements = new ArrayList();
+	    elements.add(new Element(true, a, 31));
+	    
+	    APLRecord ar = new APLRecord(m_an, DClass.IN, m_ttl, elements);
+	    
+	    byte[] exp = new byte[] { 0, 1, 31, (byte)0x80 };
+	    
+	    DNSOutput dout = new DNSOutput();
+	    
+	    ar.rrToWire(dout, null, true);
+	    assertTrue(Arrays.equals(exp, dout.toByteArray()));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 653 - 667 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+	public void test_short_address() throws UnknownHostException
+	{
+	    InetAddress a = InetAddress.getByName("232.0.11.0");
+	    ArrayList elements = new ArrayList();
+	    elements.add(new Element(true, a, 31));
+	    
+	    APLRecord ar = new APLRecord(m_an, DClass.IN, m_ttl, elements);
+	    
+	    byte[] exp = new byte[] { 0, 1, 31, (byte)0x83, (byte)232, 0, 11  };
+	    
+	    DNSOutput dout = new DNSOutput();
+	    
+	    ar.rrToWire(dout, null, true);
+	    assertTrue(Arrays.equals(exp, dout.toByteArray()));
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 20, 2 fragments, nominal size 11 lines, similarity 90%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 686 - 696 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java
+<pre>
+    public static Test suite()
+    {
+	TestSuite s = new TestSuite();
+	s.addTestSuite(Test_Element_init.class);
+	s.addTestSuite(Test_init.class);
+	s.addTestSuite(Test_rrFromWire.class);
+	s.addTestSuite(Test_rdataFromString.class);
+	s.addTestSuite(Test_rrToString.class);
+	s.addTestSuite(Test_rrToWire.class);
+	return s;
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 1238 - 1249 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+    public static Test suite()
+    {
+	TestSuite s = new TestSuite();
+	s.addTestSuite(Test_String_init.class);
+	s.addTestSuite(Test_DNSInput_init.class);
+	s.addTestSuite(NameTest.class);
+	s.addTestSuite(Test_toWire.class);
+	s.addTestSuite(Test_toWireCanonical.class);
+	s.addTestSuite(Test_equals.class);
+	s.addTestSuite(Test_compareTo.class);
+	return s;
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 21, 9 fragments, nominal size 11 lines, similarity 90%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 49 - 61 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/CNAMERecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	CNAMERecord d = new CNAMERecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.CNAME, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getTarget());
+	assertEquals(a, d.getAlias());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 61 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MBRecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	MBRecord d = new MBRecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.MB, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getAdditionalName());
+	assertEquals(a, d.getMailbox());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 61 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNAMERecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	DNAMERecord d = new DNAMERecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.DNAME, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getTarget());
+	assertEquals(a, d.getAlias());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 48 - 59 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MRRecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	MRRecord d = new MRRecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.MR, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getNewName());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 61 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MDRecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	MDRecord d = new MDRecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.MD, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getAdditionalName());
+	assertEquals(a, d.getMailAgent());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 61 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NSRecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	NSRecord d = new NSRecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.NS, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getTarget());
+	assertEquals(a, d.getAdditionalName());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 49 - 61 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MFRecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	MFRecord d = new MFRecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.MF, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getAdditionalName());
+	assertEquals(a, d.getMailAgent());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 48 - 59 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NSAP_PTRRecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	NSAP_PTRRecord d = new NSAP_PTRRecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.NSAP_PTR, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getTarget());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 48 - 59 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MGRecordTest.java
+<pre>
+    public void test_ctor_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name a = Name.fromString("my.alias.");
+
+	MGRecord d = new MGRecord(n, DClass.IN, 0xABCDEL, a);
+	assertEquals(n, d.getName());
+	assertEquals(Type.MG, d.getType());
+	assertEquals(DClass.IN, d.getDClass());
+	assertEquals(0xABCDEL, d.getTTL());
+	assertEquals(a, d.getMailbox());
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 22, 15 fragments, nominal size 13 lines, similarity 71%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 41 - 66 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DClassTest.java
+<pre>
+    public void test_string()
+    {
+	// a regular one
+	assertEquals("IN", DClass.string(DClass.IN));
+
+	// one with an alias
+	assertEquals("CH", DClass.string(DClass.CH));
+
+	// one that doesn't exist
+	assertTrue(DClass.string(20).startsWith("CLASS"));
+
+	try {
+	    DClass.string(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	
+	//  (max is 0xFFFF)
+	try {
+	    DClass.string(0x10000);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 41 - 60 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SectionTest.java
+<pre>
+    public void test_string()
+    {
+	// a regular one
+	assertEquals("au", Section.string(Section.AUTHORITY));
+
+	try {
+	    Section.string(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	
+	//  (max is 3)
+	try {
+	    Section.string(4);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 41 - 63 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/FlagsTest.java
+<pre>
+    public void test_string()
+    {
+	// a regular one
+	assertEquals("aa", Flags.string(Flags.AA));
+
+	// one that doesn't exist
+	assertTrue(Flags.string(12).startsWith("flag"));
+
+	try {
+	    Flags.string(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	
+	//  (max is 0xF)
+	try {
+	    Flags.string(0x10);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 291 - 305 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java
+<pre>
+    public void test_setOpcode_invalid()
+    {
+	try {
+	    m_h.setOpcode(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	try {
+	    m_h.setOpcode(0x100);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 68 - 90 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RcodeTest.java
+<pre>
+    public void test_TSIGstring()
+    {
+	// a regular one
+	assertEquals("BADSIG", Rcode.TSIGstring(Rcode.BADSIG));
+
+	// one that doesn't exist
+	assertTrue(Rcode.TSIGstring(20).startsWith("RESERVED"));
+
+	try {
+	    Rcode.TSIGstring(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	
+	//  (max is 0xFFFF)
+	try {
+	    Rcode.string(0x10000);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 261 - 275 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java
+<pre>
+    public void test_setRcode_invalid()
+    {
+	try {
+	    m_h.setRcode(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	try {
+	    m_h.setRcode(0x100);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 41 - 63 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/ExtendedFlagsTest.java
+<pre>
+    public void test_string()
+    {
+	// a regular one
+	assertEquals("do", ExtendedFlags.string(ExtendedFlags.DO));
+
+	// one that doesn't exist
+	assertTrue(ExtendedFlags.string(1).startsWith("flag"));
+
+	try {
+	    ExtendedFlags.string(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	
+	//  (max is 0xFFFF)
+	try {
+	    ExtendedFlags.string(0x10000);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 41 - 63 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/OpcodeTest.java
+<pre>
+    public void test_string()
+    {
+	// a regular one
+	assertEquals("IQUERY", Opcode.string(Opcode.IQUERY));
+
+	// one that doesn't exist
+	assertTrue(Opcode.string(6).startsWith("RESERVED"));
+
+	try {
+	    Opcode.string(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	
+	//  (max is 0xF)
+	try {
+	    Opcode.string(0x10);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 41 - 66 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RcodeTest.java
+<pre>
+    public void test_string()
+    {
+	// a regular one
+	assertEquals("NXDOMAIN", Rcode.string(Rcode.NXDOMAIN));
+
+	// one with an alias
+	assertEquals("NOTIMP", Rcode.string(Rcode.NOTIMP));
+
+	// one that doesn't exist
+	assertTrue(Rcode.string(20).startsWith("RESERVED"));
+
+	try {
+	    Rcode.string(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	
+	//  (max is 0xFFF)
+	try {
+	    Rcode.string(0x1000);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 82 - 88 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SectionTest.java
+<pre>
+    public void test_updString()
+    {
+	assertEquals("ZONE", Section.updString(Section.ZONE));
+	
+	try {Section.longString(-1);} catch( IllegalArgumentException e ){}
+	try {Section.longString(4);} catch( IllegalArgumentException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 74 - 80 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SectionTest.java
+<pre>
+    public void test_longString()
+    {
+	assertEquals("ADDITIONAL RECORDS", Section.longString(Section.ADDITIONAL));
+	
+	try {Section.longString(-1);} catch( IllegalArgumentException e ){}
+	try {Section.longString(4);} catch( IllegalArgumentException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 90 - 108 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/KEYRecordTest.java
+<pre>
+    public void test_Protocol_string()
+    {
+	// a regular one
+	assertEquals("DNSSEC", KEYRecord.Protocol.string(KEYRecord.Protocol.DNSSEC));
+	// a unassigned value within range
+	assertEquals("254", KEYRecord.Protocol.string(0xFE));
+	// too low
+	try {
+	    KEYRecord.Protocol.string(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){}
+	// too high
+	try {
+	    KEYRecord.Protocol.string(0x100);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 231 - 245 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java
+<pre>
+    public void test_setID_invalid()
+    {
+	try {
+	    m_h.setID(0x10000);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+	try {
+	    m_h.setID(-1);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch( IllegalArgumentException e ){
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 335 - 341 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java
+<pre>
+    public void test_getCount_invalid()
+    {
+	try {m_h.getCount(-1); fail("ArrayIndexOutOfBoundsException not thrown");}
+	catch( ArrayIndexOutOfBoundsException e ){}
+	try {m_h.getCount(4); fail("ArrayIndexOutOfBoundsException not thrown");}
+	catch( ArrayIndexOutOfBoundsException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 113 - 120 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TTLTest.java
+<pre>
+    public void test_format_invalid()
+    {
+	try {TTL.format(-1); fail("InvalidTTLException not thrown");
+	} catch( InvalidTTLException e ){}
+
+	try {TTL.format(0x100000000L); fail("InvalidTTLException not thrown");
+	} catch( InvalidTTLException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 23, 5 fragments, nominal size 12 lines, similarity 75%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 45 - 57 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSKEYRecordTest.java
+<pre>
+    public void test_ctor_0arg() throws UnknownHostException
+    {
+	DNSKEYRecord ar = new DNSKEYRecord();
+	assertNull(ar.getName());
+	assertEquals(0, ar.getType());
+	assertEquals(0, ar.getDClass());
+	assertEquals(0, ar.getTTL());
+	assertEquals(0, ar.getAlgorithm());
+	assertEquals(0, ar.getFlags());
+	assertEquals(0, ar.getFootprint());
+	assertEquals(0, ar.getProtocol());
+	assertNull(ar.getKey());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 45 - 57 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/KEYRecordTest.java
+<pre>
+    public void test_ctor_0arg() throws UnknownHostException
+    {
+	KEYRecord ar = new KEYRecord();
+	assertNull(ar.getName());
+	assertEquals(0, ar.getType());
+	assertEquals(0, ar.getDClass());
+	assertEquals(0, ar.getTTL());
+	assertEquals(0, ar.getAlgorithm());
+	assertEquals(0, ar.getFlags());
+	assertEquals(0, ar.getFootprint());
+	assertEquals(0, ar.getProtocol());
+	assertNull(ar.getKey());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 45 - 56 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java
+<pre>
+    public void test_ctor_0arg()
+    {
+	DSRecord dr = new DSRecord();
+	assertNull(dr.getName());
+	assertEquals(0, dr.getType());
+	assertEquals(0, dr.getDClass());
+	assertEquals(0, dr.getTTL());
+	assertEquals(0, dr.getAlgorithm());
+	assertEquals(0, dr.getDigestID());
+	assertNull(dr.getDigest());
+	assertEquals(0, dr.getFootprint());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 79 - 93 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java
+<pre>
+	public void test_0arg() throws UnknownHostException
+	{
+	    SOARecord ar = new SOARecord();
+	    assertNull(ar.getName());
+	    assertEquals(0, ar.getType());
+	    assertEquals(0, ar.getDClass());
+	    assertEquals(0, ar.getTTL());
+	    assertNull(ar.getHost());
+	    assertNull(ar.getAdmin());
+	    assertEquals(0, ar.getSerial());
+	    assertEquals(0, ar.getRefresh());
+	    assertEquals(0, ar.getRetry());
+	    assertEquals(0, ar.getExpire());
+	    assertEquals(0, ar.getMinimum());
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 10 - 20 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/URIRecordTest.java
+<pre>
+    public void test_ctor_0arg()
+    {
+	URIRecord r = new URIRecord();
+	assertNull(r.getName());
+	assertEquals(0, r.getType());
+	assertEquals(0, r.getDClass());
+	assertEquals(0, r.getTTL());
+	assertEquals(0, r.getPriority());
+	assertEquals(0, r.getWeight());
+	assertTrue("".equals(r.getTarget()));
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 24, 2 fragments, nominal size 19 lines, similarity 100%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 66 - 88 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSKEYRecordTest.java
+<pre>
+    public void test_ctor_7arg() throws TextParseException
+    {
+	Name n = Name.fromString("My.Absolute.Name.");
+	Name r = Name.fromString("My.Relative.Name");
+	byte[] key = new byte[] { 0, 1, 3, 5, 7, 9 };
+
+	DNSKEYRecord kr = new DNSKEYRecord(n, DClass.IN, 0x24AC, 0x9832, 0x12, 0x67, key);
+	assertEquals(n, kr.getName());
+	assertEquals(Type.DNSKEY, kr.getType());
+	assertEquals(DClass.IN, kr.getDClass());
+	assertEquals(0x24AC, kr.getTTL());
+	assertEquals(0x9832, kr.getFlags());
+	assertEquals(0x12, kr.getProtocol());
+	assertEquals(0x67, kr.getAlgorithm());
+	assertTrue(Arrays.equals(key, kr.getKey()));
+
+	// a relative name
+	try {
+	    new DNSKEYRecord(r, DClass.IN, 0x24AC, 0x9832, 0x12, 0x67, key);
+	    fail("RelativeNameException not thrown");
+	}
+	catch( RelativeNameException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 66 - 88 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/KEYRecordTest.java
+<pre>
+    public void test_ctor_7arg() throws TextParseException
+    {
+	Name n = Name.fromString("My.Absolute.Name.");
+	Name r = Name.fromString("My.Relative.Name");
+	byte[] key = new byte[] { 0, 1, 3, 5, 7, 9 };
+
+	KEYRecord kr = new KEYRecord(n, DClass.IN, 0x24AC, 0x9832, 0x12, 0x67, key);
+	assertEquals(n, kr.getName());
+	assertEquals(Type.KEY, kr.getType());
+	assertEquals(DClass.IN, kr.getDClass());
+	assertEquals(0x24AC, kr.getTTL());
+	assertEquals(0x9832, kr.getFlags());
+	assertEquals(0x12, kr.getProtocol());
+	assertEquals(0x67, kr.getAlgorithm());
+	assertTrue(Arrays.equals(key, kr.getKey()));
+
+	// a relative name
+	try {
+	    new KEYRecord(r, DClass.IN, 0x24AC, 0x9832, 0x12, 0x67, key);
+	    fail("RelativeNameException not thrown");
+	}
+	catch( RelativeNameException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 25, 2 fragments, nominal size 15 lines, similarity 80%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 38 - 57 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSSECWithLunaProviderTest.java
+<pre>
+	public void testSignHSM() throws Exception {
+
+		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(KEY_ALGORITHM, lunaJCAProvider);
+		keyPairGenerator.initialize(512);
+		KeyPair keyPair = keyPairGenerator.generateKeyPair();
+
+		Signature signer = Signature.getInstance(SIGNATURE_ALGORITHM, lunaJCAProvider);
+		signer.initSign(keyPair.getPrivate());
+		signer.update(toSign);
+		byte[] signature = signer.sign();
+		assertNotNull(signature);
+
+		// verify the signature
+		Signature verifier = Signature.getInstance(SIGNATURE_ALGORITHM, lunaJCAProvider);
+		verifier.initVerify(keyPair.getPublic());
+		verifier.update(toSign);
+		boolean verify = verifier.verify(signature);
+		assertTrue(verify);
+
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 26 - 45 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSSECWithProviderTest.java
+<pre>
+	public void testSignSoftware() throws Exception {
+
+		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(KEY_ALGORITHM);
+		keyPairGenerator.initialize(512);
+		KeyPair keyPair = keyPairGenerator.generateKeyPair();
+
+		Signature signer = Signature.getInstance(SIGNATURE_ALGORITHM);
+		signer.initSign(keyPair.getPrivate());
+		signer.update(toSign);
+		byte[] signature = signer.sign();
+		assertNotNull(signature);
+
+		// verify the signature
+		Signature verifier = Signature.getInstance(SIGNATURE_ALGORITHM);
+		verifier.initVerify(keyPair.getPublic());
+		verifier.update(toSign);
+		boolean verify = verifier.verify(signature);
+		assertTrue(verify);
+
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 26, 2 fragments, nominal size 12 lines, similarity 75%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 59 - 74 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSSECWithLunaProviderTest.java
+<pre>
+	public void testSignWithDNSSECAndHSM() throws Exception {
+
+		// generate a signature
+		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(KEY_ALGORITHM, lunaJCAProvider);
+		keyPairGenerator.initialize(512);
+		KeyPair keyPair = keyPairGenerator.generateKeyPair();
+		byte[] signature = DNSSEC.sign(keyPair.getPrivate(), keyPair.getPublic(), algorithm, toSign, lunaJ		assertNotNull(signature);
+
+		// verify the signature
+		Signature verifier = Signature.getInstance(DNSSEC.algString(algorithm), lunaJCAProvider);
+		verifier.initVerify(keyPair.getPublic());
+		verifier.update(toSign);
+		boolean verify = verifier.verify(signature);
+		assertTrue(verify);
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 76 - 91 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSSECWithLunaProviderTest.java
+<pre>
+	public void testSignWithDNSSECAndSoftware() throws Exception {
+
+		// generate a signature
+		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(KEY_ALGORITHM);
+		keyPairGenerator.initialize(512);
+		KeyPair keyPair = keyPairGenerator.generateKeyPair();
+		byte[] signature = DNSSEC.sign(keyPair.getPrivate(), keyPair.getPublic(), algorithm, toSign);
+		assertNotNull(signature);
+
+		// verify the signature
+		Signature verifier = Signature.getInstance(DNSSEC.algString(algorithm));
+		verifier.initVerify(keyPair.getPublic());
+		verifier.update(toSign);
+		boolean verify = verifier.verify(signature);
+		assertTrue(verify);
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 27, 2 fragments, nominal size 11 lines, similarity 72%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 84 - 96 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java
+<pre>
+	public void test_basic() throws TextParseException
+	{
+	    DSRecord dr = new DSRecord(m_n, DClass.IN, m_ttl,
+				       m_footprint, m_algorithm, m_digestid, m_digest);
+	    assertEquals(m_n, dr.getName());
+	    assertEquals(DClass.IN, dr.getDClass());
+	    assertEquals(Type.DS, dr.getType());
+	    assertEquals(m_ttl, dr.getTTL());
+	    assertEquals(m_footprint, dr.getFootprint());
+	    assertEquals(m_algorithm, dr.getAlgorithm());
+	    assertEquals(m_digestid, dr.getDigestID());
+	    assertTrue(Arrays.equals(m_digest, dr.getDigest()));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 158 - 170 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java
+<pre>
+	public void test_null_digest()
+	{
+	    DSRecord dr = new DSRecord(m_n, DClass.IN, m_ttl,
+				       m_footprint, m_algorithm, m_digestid, null);
+	    assertEquals(m_n, dr.getName());
+	    assertEquals(DClass.IN, dr.getDClass());
+	    assertEquals(Type.DS, dr.getType());
+	    assertEquals(m_ttl, dr.getTTL());
+	    assertEquals(m_footprint, dr.getFootprint());
+	    assertEquals(m_algorithm, dr.getAlgorithm());
+	    assertEquals(m_digestid, dr.getDigestID());
+	    assertNull(dr.getDigest());
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 28, 2 fragments, nominal size 10 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 173 - 187 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java
+<pre>
+    public void test_rrFromWire() throws IOException
+    {
+	byte[] raw = new byte[] { (byte)0xAB, (byte)0xCD, (byte)0xEF, 
+				  (byte)0x01, (byte)0x23, (byte)0x45,
+				  (byte)0x67, (byte)0x89 };
+	DNSInput in = new DNSInput(raw);
+
+	DSRecord dr = new DSRecord();
+	dr.rrFromWire(in);
+	assertEquals(0xABCD, dr.getFootprint());
+	assertEquals(0xEF, dr.getAlgorithm());
+	assertEquals(0x01, dr.getDigestID());
+	assertTrue(Arrays.equals(new byte[] { (byte)0x23, (byte)0x45, (byte)0x67, (byte)0x89 },
+				 dr.getDigest()));
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 189 - 203 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java
+<pre>
+    public void test_rdataFromString() throws IOException
+    {
+	byte[] raw = new byte[] { (byte)0xAB, (byte)0xCD, (byte)0xEF, 
+				  (byte)0x01, (byte)0x23, (byte)0x45,
+				  (byte)0x67, (byte)0x89 };
+	Tokenizer t = new Tokenizer(0xABCD + " " + 0xEF + " " + 0x01 + " 23456789AB");
+
+	DSRecord dr = new DSRecord();
+	dr.rdataFromString(t, null);
+	assertEquals(0xABCD, dr.getFootprint());
+	assertEquals(0xEF, dr.getAlgorithm());
+	assertEquals(0x01, dr.getDigestID());
+	assertTrue(Arrays.equals(new byte[] { (byte)0x23, (byte)0x45, (byte)0x67, (byte)0x89, (byte)0xAB },				 dr.getDigest()));
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 29, 2 fragments, nominal size 13 lines, similarity 92%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 76 - 90 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java
+<pre>
+	public void test_basic() throws TextParseException
+	{
+	    GPOSRecord gr = new GPOSRecord(m_n, DClass.IN, m_ttl,
+					   m_long, m_lat, m_alt);
+	    assertEquals(m_n, gr.getName());
+	    assertEquals(DClass.IN, gr.getDClass());
+	    assertEquals(Type.GPOS, gr.getType());
+	    assertEquals(m_ttl, gr.getTTL());
+	    assertEquals(new Double(m_long), new Double(gr.getLongitude()));
+	    assertEquals(new Double(m_lat), new Double(gr.getLatitude()));
+	    assertEquals(new Double(m_alt), new Double(gr.getAltitude()));
+	    assertEquals(new Double(m_long).toString(), gr.getLongitudeString());
+	    assertEquals(new Double(m_lat).toString(), gr.getLatitudeString());
+	    assertEquals(new Double(m_alt).toString(), gr.getAltitudeString());
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 159 - 175 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java
+<pre>
+	public void test_basic() throws TextParseException
+	{
+	    GPOSRecord gr = new GPOSRecord(m_n, DClass.IN, m_ttl,
+					   new Double(m_long).toString(),
+					   new Double(m_lat).toString(),
+					   new Double(m_alt).toString());
+	    assertEquals(m_n, gr.getName());
+	    assertEquals(DClass.IN, gr.getDClass());
+	    assertEquals(Type.GPOS, gr.getType());
+	    assertEquals(m_ttl, gr.getTTL());
+	    assertEquals(new Double(m_long), new Double(gr.getLongitude()));
+	    assertEquals(new Double(m_lat), new Double(gr.getLatitude()));
+	    assertEquals(new Double(m_alt), new Double(gr.getAltitude()));
+	    assertEquals(new Double(m_long).toString(), gr.getLongitudeString());
+	    assertEquals(new Double(m_lat).toString(), gr.getLatitudeString());
+	    assertEquals(new Double(m_alt).toString(), gr.getAltitudeString());
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 30, 2 fragments, nominal size 15 lines, similarity 86%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 55 - 69 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java
+<pre>
+    public void test_fixture_state()
+    {
+	assertEquals(0xABCD, m_h.getID());
+
+	boolean[] flags = m_h.getFlags();
+	for( int i=0; i&lt;flags.length; ++i){
+	    assertFalse(flags[i]);
+	}
+	assertEquals(0, m_h.getRcode());
+	assertEquals(0, m_h.getOpcode());
+	assertEquals(0, m_h.getCount(0));
+	assertEquals(0, m_h.getCount(1));
+	assertEquals(0, m_h.getCount(2));
+	assertEquals(0, m_h.getCount(3));
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 71 - 86 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java
+<pre>
+    public void test_ctor_0arg()
+    {
+	m_h = new Header();
+	assertTrue(0 &lt;= m_h.getID() &amp;&amp; m_h.getID() &lt; 0xFFFF);
+
+	boolean[] flags = m_h.getFlags();
+	for( int i=0; i&lt;flags.length; ++i){
+	    assertFalse(flags[i]);
+	}
+	assertEquals(0, m_h.getRcode());
+	assertEquals(0, m_h.getOpcode());
+	assertEquals(0, m_h.getCount(0));
+	assertEquals(0, m_h.getCount(1));
+	assertEquals(0, m_h.getCount(2));
+	assertEquals(0, m_h.getCount(3));
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 31, 2 fragments, nominal size 11 lines, similarity 81%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 75 - 87 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HINFORecordTest.java
+<pre>
+    public void test_ctor_5arg_invalid_CPU() throws TextParseException
+    {
+	Name n = Name.fromString("The.Name.");
+	long ttl = 0xABCDL;
+	String cpu = "i686 Intel(R) Pentium(R) M \\256 processor 1.70GHz GenuineIntel GNU/Linux";
+	String os = "Linux troy 2.6.10-gentoo-r6 #8 Wed Apr 6 21:25:04 MDT 2005";
+	
+	try {
+	    new HINFORecord(n, DClass.IN, ttl, cpu, os);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch(IllegalArgumentException e){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 89 - 101 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HINFORecordTest.java
+<pre>
+    public void test_ctor_5arg_invalid_OS() throws TextParseException
+    {
+	Name n = Name.fromString("The.Name.");
+	long ttl = 0xABCDL;
+	String cpu = "i686 Intel(R) Pentium(R) M processor 1.70GHz GenuineIntel GNU/Linux";
+	String os = "Linux troy 2.6.10-gentoo-r6 \\1 #8 Wed Apr 6 21:25:04 MDT 2005";
+	
+	try {
+	    new HINFORecord(n, DClass.IN, ttl, cpu, os);
+	    fail("IllegalArgumentException not thrown");
+	}
+	catch(IllegalArgumentException e){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 32, 2 fragments, nominal size 11 lines, similarity 72%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 132 - 145 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HINFORecordTest.java
+<pre>
+    public void test_rdataFromString_invalid_CPU() throws IOException
+    {
+	String cpu = "Intel(R) Pentium(R) \\388 M processor 1.70GHz";
+	String os = "Linux troy 2.6.10-gentoo-r6";
+
+	Tokenizer t = new Tokenizer("\"" + cpu + "\" \"" + os + "\"");
+
+	HINFORecord dr = new HINFORecord();
+	try {
+	    dr.rdataFromString(t, null);
+	    fail("TextParseException not thrown");
+	}
+	catch(TextParseException e){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 147 - 159 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HINFORecordTest.java
+<pre>
+    public void test_rdataFromString_invalid_OS() throws IOException
+    {
+	String cpu = "Intel(R) Pentium(R) M processor 1.70GHz";
+
+	Tokenizer t = new Tokenizer("\"" + cpu + "\"");
+
+	HINFORecord dr = new HINFORecord();
+	try {
+	    dr.rdataFromString(t, null);
+	    fail("TextParseException not thrown");
+	}
+	catch(TextParseException e){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 33, 2 fragments, nominal size 18 lines, similarity 88%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 48 - 65 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MessageTest.java
+<pre>
+	public void test_0arg()
+	{
+	    Message m = new Message();
+	    assertTrue(Arrays.equals(new Record[0], m.getSectionArray(0)));
+	    assertTrue(Arrays.equals(new Record[0], m.getSectionArray(1)));
+	    assertTrue(Arrays.equals(new Record[0], m.getSectionArray(2)));
+	    assertTrue(Arrays.equals(new Record[0], m.getSectionArray(3)));
+	    try {
+		m.getSectionArray(4);
+		fail("IndexOutOfBoundsException not thrown");
+	    }
+	    catch(IndexOutOfBoundsException e){}
+	    Header h = m.getHeader();
+	    assertEquals(0, h.getCount(0));
+	    assertEquals(0, h.getCount(1));
+	    assertEquals(0, h.getCount(2));
+	    assertEquals(0, h.getCount(3));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 67 - 85 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MessageTest.java
+<pre>
+	public void test_1arg()
+	{
+	    Message m = new Message(10);
+	    assertEquals(new Header(10).toString(), m.getHeader().toString());
+	    assertTrue(Arrays.equals(new Record[0], m.getSectionArray(0)));
+	    assertTrue(Arrays.equals(new Record[0], m.getSectionArray(1)));
+	    assertTrue(Arrays.equals(new Record[0], m.getSectionArray(2)));
+	    assertTrue(Arrays.equals(new Record[0], m.getSectionArray(3)));
+	    try {
+		m.getSectionArray(4);
+		fail("IndexOutOfBoundsException not thrown");
+	    }
+	    catch(IndexOutOfBoundsException e){}
+	    Header h = m.getHeader();
+	    assertEquals(0, h.getCount(0));
+	    assertEquals(0, h.getCount(1));
+	    assertEquals(0, h.getCount(2));
+	    assertEquals(0, h.getCount(3));
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 34, 3 fragments, nominal size 23 lines, similarity 82%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 136 - 167 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MnemonicTest.java
+<pre>
+    public void test_basic_operation()
+    {
+	// setUp creates Mnemonic with CASE_UPPER
+	m_mn.add( 10, "Ten" );
+	m_mn.add( 20, "Twenty" );
+	m_mn.addAlias( 20, "Veinte" );
+	m_mn.add( 30, "Thirty" );
+
+	String text = m_mn.getText(10);
+	assertEquals( "TEN", text );
+	
+	text = m_mn.getText(20);
+	assertEquals( "TWENTY", text );
+	
+	text = m_mn.getText(30);
+	assertEquals( "THIRTY", text );
+
+	text = m_mn.getText(40);
+	assertEquals( "40", text );
+
+	int value = m_mn.getValue("tEn");
+	assertEquals(10, value);
+
+	value = m_mn.getValue("twenty");
+	assertEquals(20, value);
+
+	value = m_mn.getValue("VeiNTe");
+	assertEquals(20, value);
+
+	value = m_mn.getValue("THIRTY");
+	assertEquals(30, value);
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 169 - 200 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MnemonicTest.java
+<pre>
+    public void test_basic_operation_lower()
+    {
+	m_mn = new Mnemonic(MnemonicTest.class.getName() + " LOWER", Mnemonic.CASE_LOWER);
+	m_mn.add( 10, "Ten" );
+	m_mn.add( 20, "Twenty" );
+	m_mn.addAlias( 20, "Veinte" );
+	m_mn.add( 30, "Thirty" );
+
+	String text = m_mn.getText(10);
+	assertEquals( "ten", text );
+	
+	text = m_mn.getText(20);
+	assertEquals( "twenty", text );
+	
+	text = m_mn.getText(30);
+	assertEquals( "thirty", text );
+
+	text = m_mn.getText(40);
+	assertEquals( "40", text );
+
+	int value = m_mn.getValue("tEn");
+	assertEquals(10, value);
+
+	value = m_mn.getValue("twenty");
+	assertEquals(20, value);
+
+	value = m_mn.getValue("VeiNTe");
+	assertEquals(20, value);
+
+	value = m_mn.getValue("THIRTY");
+	assertEquals(30, value);
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 248 - 283 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MnemonicTest.java
+<pre>
+    public void test_addAll()
+    {
+	m_mn.add( 10, "Ten" );
+	m_mn.add( 20, "Twenty" );
+
+	Mnemonic mn2 = new Mnemonic("second test Mnemonic", Mnemonic.CASE_UPPER);
+	mn2.add( 20, "Twenty" );
+	mn2.addAlias( 20, "Veinte" );
+	mn2.add( 30, "Thirty" );
+
+	m_mn.addAll( mn2 );
+
+	String text = m_mn.getText(10);
+	assertEquals( "TEN", text );
+	
+	text = m_mn.getText(20);
+	assertEquals( "TWENTY", text );
+	
+	text = m_mn.getText(30);
+	assertEquals( "THIRTY", text );
+
+	text = m_mn.getText(40);
+	assertEquals( "40", text );
+
+	int value = m_mn.getValue("tEn");
+	assertEquals(10, value);
+
+	value = m_mn.getValue("twenty");
+	assertEquals(20, value);
+
+	value = m_mn.getValue("VeiNTe");
+	assertEquals(20, value);
+
+	value = m_mn.getValue("THIRTY");
+	assertEquals(30, value);
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 35, 2 fragments, nominal size 15 lines, similarity 86%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 64 - 84 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MXRecordTest.java
+<pre>
+    public void test_rrToWire() throws TextParseException
+    {
+	Name n = Name.fromString("My.Name.");
+	Name m = Name.fromString("M.O.n.");
+	
+	MXRecord mr = new MXRecord(n, DClass.IN, 0xB12FL, 0x1F2B, m );
+
+	// canonical
+	DNSOutput dout = new DNSOutput();
+	mr.rrToWire(dout, null, true);
+	byte[] out = dout.toByteArray();
+	byte[] exp = new byte[] { 0x1F, 0x2B, 1, 'm', 1, 'o', 1, 'n', 0 };
+	assertTrue(Arrays.equals(exp, out));
+
+	// case sensitive
+	dout = new DNSOutput();
+	mr.rrToWire(dout, null, false);
+	out = dout.toByteArray();
+	exp = new byte[] { 0x1F, 0x2B, 1, 'M', 1, 'O', 1, 'n', 0 };
+	assertTrue(Arrays.equals(exp, out));
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 189 - 211 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/U16NameBaseTest.java
+<pre>
+    public void test_rrToWire() throws IOException, TextParseException
+    {
+	Name n = Name.fromString("My.Name.");
+	Name m = Name.fromString("M.O.n.");
+	
+	TestClass tc = new TestClass(n, Type.MX, DClass.IN, 0xB12FL,
+				     0x1F2B, "u16 description",
+				     m, "name description");
+
+	// canonical
+	DNSOutput dout = new DNSOutput();
+	tc.rrToWire(dout, null, true);
+	byte[] out = dout.toByteArray();
+	byte[] exp = new byte[] { 0x1F, 0x2B, 1, 'm', 1, 'o', 1, 'n', 0 };
+	assertTrue(Arrays.equals(exp, out));
+
+	// case sensitive
+	dout = new DNSOutput();
+	tc.rrToWire(dout, null, false);
+	out = dout.toByteArray();
+	exp = new byte[] { 0x1F, 0x2B, 1, 'M', 1, 'O', 1, 'n', 0 };
+	assertTrue(Arrays.equals(exp, out));
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 36, 4 fragments, nominal size 15 lines, similarity 73%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 110 - 129 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_ctor_abs() throws TextParseException
+	{
+	    Name n = new Name(m_abs);
+	    assertTrue(n.isAbsolute());
+	    assertFalse(n.isWild());
+	    assertEquals(4, n.labels());
+	    assertEquals(17, n.length());
+	    assertTrue(Arrays.equals(new byte[] { 3, 'W', 'W', 'W' },
+				     n.getLabel(0)));
+	    assertEquals("WWW", n.getLabelString(0));
+	    assertTrue(Arrays.equals(new byte[] { 7, 'D', 'n', 's', 'J', 'a', 'v', 'a' },
+				     n.getLabel(1)));
+	    assertEquals("DnsJava", n.getLabelString(1));
+	    assertTrue(Arrays.equals(new byte[] { 3, 'o', 'r', 'g' },
+				     n.getLabel(2)));
+	    assertEquals("org", n.getLabelString(2));
+	    assertTrue(Arrays.equals(new byte[] { 0 },
+				     n.getLabel(3)));
+	    assertEquals("", n.getLabelString(3));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 227 - 246 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_ctor_abs_rel_origin() throws TextParseException
+	{
+	    Name n = new Name(m_abs, m_rel_origin);
+	    assertTrue(n.isAbsolute());
+	    assertFalse(n.isWild());
+	    assertEquals(4, n.labels());
+	    assertEquals(17, n.length());
+	    assertTrue(Arrays.equals(new byte[] { 3, 'W', 'W', 'W' },
+				     n.getLabel(0)));
+	    assertEquals("WWW", n.getLabelString(0));
+	    assertTrue(Arrays.equals(new byte[] { 7, 'D', 'n', 's', 'J', 'a', 'v', 'a' },
+				     n.getLabel(1)));
+	    assertEquals("DnsJava", n.getLabelString(1));
+	    assertTrue(Arrays.equals(new byte[] { 3, 'o', 'r', 'g' },
+				     n.getLabel(2)));
+	    assertEquals("org", n.getLabelString(2));
+	    assertTrue(Arrays.equals(new byte[] { 0 },
+				     n.getLabel(3)));
+	    assertEquals("", n.getLabelString(3));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 206 - 225 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_ctor_abs_abs_origin() throws TextParseException
+	{
+	    Name n = new Name(m_abs, m_abs_origin);
+	    assertTrue(n.isAbsolute());
+	    assertFalse(n.isWild());
+	    assertEquals(4, n.labels());
+	    assertEquals(17, n.length());
+	    assertTrue(Arrays.equals(new byte[] { 3, 'W', 'W', 'W' },
+				     n.getLabel(0)));
+	    assertEquals("WWW", n.getLabelString(0));
+	    assertTrue(Arrays.equals(new byte[] { 7, 'D', 'n', 's', 'J', 'a', 'v', 'a' },
+				     n.getLabel(1)));
+	    assertEquals("DnsJava", n.getLabelString(1));
+	    assertTrue(Arrays.equals(new byte[] { 3, 'o', 'r', 'g' },
+				     n.getLabel(2)));
+	    assertEquals("org", n.getLabelString(2));
+	    assertTrue(Arrays.equals(new byte[] { 0 },
+				     n.getLabel(3)));
+	    assertEquals("", n.getLabelString(3));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 248 - 267 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_ctor_rel_abs_origin() throws TextParseException
+	{
+	    Name n = new Name(m_rel, m_abs_origin);
+	    assertTrue(n.isAbsolute());
+	    assertFalse(n.isWild());
+	    assertEquals(4, n.labels());
+	    assertEquals(18, n.length());
+	    assertTrue(Arrays.equals(new byte[] { 3, 'W', 'W', 'W' },
+				     n.getLabel(0)));
+	    assertEquals("WWW", n.getLabelString(0));
+	    assertTrue(Arrays.equals(new byte[] { 7, 'D', 'n', 's', 'J', 'a', 'v', 'a' },
+				     n.getLabel(1)));
+	    assertEquals("DnsJava", n.getLabelString(1));
+	    assertTrue(Arrays.equals(new byte[] { 4, 'O', 'r', 'i', 'g'},
+				     n.getLabel(2)));
+	    assertEquals("Orig", n.getLabelString(2));
+	    assertTrue(Arrays.equals(new byte[] { 0 },
+				     n.getLabel(3)));
+	    assertEquals("", n.getLabelString(3));
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 37, 2 fragments, nominal size 13 lines, similarity 76%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 278 - 295 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_ctor_max_label() throws TextParseException
+	{
+	    // name with a 63 char label
+	    Name n = new Name("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.b.");
+	    assertTrue(n.isAbsolute());
+	    assertFalse(n.isWild());
+	    assertEquals(3, n.labels());
+	    assertEquals(67, n.length());
+	    assertTrue(Arrays.equals(new byte[] { 63, 'a','a','a','a','a','a','a','a','a','a','a','a','a','				     n.getLabel(0)));
+	    assertEquals("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", n.getLabelStrin	    assertTrue(Arrays.equals(new byte[] { 1, 'b' },
+				     n.getLabel(1)));
+	    assertEquals("b", n.getLabelString(1));
+	    assertTrue(Arrays.equals(new byte[] { 0 },
+				     n.getLabel(2)));
+	    assertEquals("", n.getLabelString(2));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 392 - 408 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_ctor_max_label_escaped() throws TextParseException
+	{
+	    // name with a 63 char label containing an escape
+	    Name n = new Name("aaaa\\100aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.b.");
+	    assertTrue(n.isAbsolute());
+	    assertFalse(n.isWild());
+	    assertEquals(3, n.labels());
+	    assertEquals(67, n.length());
+	    assertTrue(Arrays.equals(new byte[] { 63, 'a','a','a','a',(byte)100,'a','a','a','a','a','a','a'				     n.getLabel(0)));
+	    assertTrue(Arrays.equals(new byte[] { 1, 'b' },
+				     n.getLabel(1)));
+	    assertEquals("b", n.getLabelString(1));
+	    assertTrue(Arrays.equals(new byte[] { 0 },
+				     n.getLabel(2)));
+	    assertEquals("", n.getLabelString(2));
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 38, 2 fragments, nominal size 11 lines, similarity 81%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 633 - 647 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_basic_compression_state_restore() throws TextParseException, WireParseException
+	{
+	    byte[] raw = new byte[] { 10, 3, 'a', 'b', 'c', 0, (byte)0xC0, 1, 3, 'd', 'e', 'f', 0 };
+	    Name e = Name.fromString("abc.");
+	    Name e2 = Name.fromString("def.");
+	    
+	    DNSInput in = new DNSInput(raw);
+	    in.jump(6);
+	    
+	    Name n = new Name(in);
+	    assertEquals(e, n);
+
+	    n = new Name(in);
+	    assertEquals(e2, n);
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 649 - 663 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_two_part_compression_state_restore() throws TextParseException, WireParseException	{
+	    byte[] raw = new byte[] { 10, 3, 'a', 'b', 'c', 0, 1, 'B', (byte)0xC0, 1, 3, 'd', 'e', 'f', 0 }	    Name e = Name.fromString("B.abc.");
+	    Name e2 = Name.fromString("def.");
+	    
+	    DNSInput in = new DNSInput(raw);
+	    in.jump(6);
+	    
+	    Name n = new Name(in);
+	    assertEquals(e, n);
+
+	    n = new Name(in);
+	    assertEquals(e2, n);
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 39, 3 fragments, nominal size 12 lines, similarity 75%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 960 - 974 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_with_partial_Compression() throws TextParseException
+	{
+	    Name d = new Name("Basic.Name.");
+	    Name n = new Name("A.Basic.Name.");
+	    
+	    Compression c = new Compression();
+	    c.add(257, d);
+	    byte[] exp = new byte[] { 1, 'A', (byte)0xC1, 0x1 };
+
+	    DNSOutput o = new DNSOutput();
+	    n.toWire(o, c);
+	    assertTrue(Arrays.equals(exp, o.toByteArray()));
+	    assertEquals(257, c.get(d));
+	    assertEquals(0, c.get(n));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 1002 - 1016 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_3arg() throws TextParseException
+	{
+	    Name d = new Name("Basic.Name.");
+	    Name n = new Name("A.Basic.Name.");
+	    
+	    Compression c = new Compression();
+	    c.add(257, d);
+	    byte[] exp = new byte[] { 1, 'A', (byte)0xC1, 0x1 };
+
+	    DNSOutput o = new DNSOutput();
+	    n.toWire(o, c, false);
+	    assertTrue(Arrays.equals(exp, o.toByteArray()));
+	    assertEquals(257, c.get(d));
+	    assertEquals(0, c.get(n));
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 1055 - 1069 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java
+<pre>
+	public void test_3arg() throws TextParseException
+	{
+	    Name d = new Name("Basic.Name.");
+	    Name n = new Name("A.Basic.Name.");
+	    
+	    Compression c = new Compression();
+	    c.add(257, d);
+	    byte[] exp = new byte[] { 1, 'a', 5, 'b', 'a', 's', 'i', 'c', 4, 'n', 'a', 'm', 'e', 0 };
+
+	    DNSOutput o = new DNSOutput();
+	    n.toWire(o, c, true);
+	    assertTrue(Arrays.equals(exp, o.toByteArray()));
+	    assertEquals(257, c.get(d));
+	    assertEquals(-1, c.get(n));
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 40, 2 fragments, nominal size 18 lines, similarity 77%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 151 - 170 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java
+<pre>
+    public void test_newRecord_3arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name r = Name.fromString("my.relative.name");
+	int t = Type.A;
+	int d = DClass.IN;
+
+	Record rec = Record.newRecord(n, t, d);
+	assertTrue(rec instanceof EmptyRecord);
+	assertEquals(n, rec.getName());
+	assertEquals(t, rec.getType());
+	assertEquals(d, rec.getDClass());
+	assertEquals(0, rec.getTTL());
+
+	try {
+	    Record.newRecord(r, t, d);
+	    fail("RelativeNameException not thrown");
+	}
+	catch( RelativeNameException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 172 - 192 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java
+<pre>
+    public void test_newRecord_4arg() throws TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name r = Name.fromString("my.relative.name");
+	int t = Type.A;
+	int d = DClass.IN;
+	int ttl = 0xDBE8;
+
+	Record rec = Record.newRecord(n, t, d, ttl);
+	assertTrue(rec instanceof EmptyRecord);
+	assertEquals(n, rec.getName());
+	assertEquals(t, rec.getType());
+	assertEquals(d, rec.getDClass());
+	assertEquals(ttl, rec.getTTL());
+
+	try {
+	    Record.newRecord(r, t, d, ttl);
+	    fail("RelativeNameException not thrown");
+	}
+	catch( RelativeNameException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 41, 2 fragments, nominal size 15 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 417 - 441 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java
+<pre>
+    public void test_rdataToWireCanonical() throws IOException,
+						   TextParseException,
+						   UnknownHostException
+				       
+    {
+	Name n = Name.fromString("My.Name.");
+	Name n2 = Name.fromString("My.Second.Name.");
+	int t = Type.NS;
+	int d = DClass.IN;
+	int ttl = 0xABE99;
+	DNSOutput out = new DNSOutput();
+	n2.toWire(out, null);
+	byte[] data = out.toByteArray();
+
+	out = new DNSOutput();
+	n2.toWireCanonical(out);
+	byte[] exp = out.toByteArray();
+
+	Record rec = Record.newRecord(n, t, d, ttl, data.length, data);
+	assertTrue(rec instanceof NSRecord);
+
+	byte[] after = rec.rdataToWireCanonical();
+	
+	assertTrue(Arrays.equals(exp, after));
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 443 - 460 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java
+<pre>
+    public void test_rdataToString() throws IOException,
+					    TextParseException,
+					    UnknownHostException
+				       
+    {
+	Name n = Name.fromString("My.Name.");
+	Name n2 = Name.fromString("My.Second.Name.");
+	int t = Type.NS;
+	int d = DClass.IN;
+	int ttl = 0xABE99;
+	DNSOutput out = new DNSOutput();
+	n2.toWire(out, null);
+	byte[] data = out.toByteArray();
+
+	Record rec = Record.newRecord(n, t, d, ttl, data.length, data);
+	assertTrue(rec instanceof NSRecord);
+	assertEquals(rec.rrToString(), rec.rdataToString());
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 42, 3 fragments, nominal size 15 lines, similarity 80%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 890 - 899 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java
+<pre>
+    public void test_checkU8()
+    {
+	try {Record.checkU8("field", -1); fail("IllegalArgumentException not thrown");}
+	catch( IllegalArgumentException e ){}
+	assertEquals(0, Record.checkU8("field", 0));
+	assertEquals(0x9D, Record.checkU8("field", 0x9D));
+	assertEquals(0xFF, Record.checkU8("field", 0xFF));
+	try {Record.checkU8("field", 0x100); fail("IllegalArgumentException not thrown");}
+	catch( IllegalArgumentException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 901 - 910 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java
+<pre>
+    public void test_checkU16()
+    {
+	try {Record.checkU16("field", -1); fail("IllegalArgumentException not thrown");}
+	catch( IllegalArgumentException e ){}
+	assertEquals(0, Record.checkU16("field", 0));
+	assertEquals(0x9DA1, Record.checkU16("field", 0x9DA1));
+	assertEquals(0xFFFF, Record.checkU16("field", 0xFFFF));
+	try {Record.checkU16("field", 0x10000); fail("IllegalArgumentException not thrown");}
+	catch( IllegalArgumentException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 912 - 921 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java
+<pre>
+    public void test_checkU32()
+    {
+	try {Record.checkU32("field", -1); fail("IllegalArgumentException not thrown");}
+	catch( IllegalArgumentException e ){}
+	assertEquals(0, Record.checkU32("field", 0));
+	assertEquals(0x9DA1F02DL, Record.checkU32("field", 0x9DA1F02DL));
+	assertEquals(0xFFFFFFFFL, Record.checkU32("field", 0xFFFFFFFFL));
+	try {Record.checkU32("field", 0x100000000L); fail("IllegalArgumentException not thrown");}
+	catch( IllegalArgumentException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 43, 2 fragments, nominal size 15 lines, similarity 73%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 285 - 302 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RRsetTest.java
+<pre>
+    public void test_Record_placement()
+    {
+	m_rs.addRR(m_a1);
+	m_rs.addRR(m_s1);
+	m_rs.addRR(m_a2);
+
+	Iterator itr = m_rs.rrs();
+	assertTrue(itr.hasNext());
+	assertEquals(m_a1, itr.next());
+	assertTrue(itr.hasNext());
+	assertEquals(m_a2, itr.next());
+	assertFalse(itr.hasNext());
+
+	itr = m_rs.sigs();
+	assertTrue(itr.hasNext());
+	assertEquals(m_s1, itr.next());
+	assertFalse(itr.hasNext());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 304 - 320 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RRsetTest.java
+<pre>
+    public void test_noncycling_iterator()
+    {
+	m_rs.addRR(m_a1);
+	m_rs.addRR(m_a2);
+
+	Iterator itr = m_rs.rrs(false);
+	assertTrue(itr.hasNext());
+	assertEquals(m_a1, itr.next());
+	assertTrue(itr.hasNext());
+	assertEquals(m_a2, itr.next());
+
+	itr = m_rs.rrs(false);
+	assertTrue(itr.hasNext());
+	assertEquals(m_a1, itr.next());
+	assertTrue(itr.hasNext());
+	assertEquals(m_a2, itr.next());
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 44, 4 fragments, nominal size 16 lines, similarity 76%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 44 - 65 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SetResponseTest.java
+<pre>
+    public void test_ctor_1arg()
+    {
+	final int[] types = new int[] { SetResponse.UNKNOWN,
+					SetResponse.NXDOMAIN,
+					SetResponse.NXRRSET,
+					SetResponse.DELEGATION,
+					SetResponse.CNAME,
+					SetResponse.DNAME,
+					SetResponse.SUCCESSFUL };
+
+	for( int i=0; i&lt;types.length; ++i){
+	    SetResponse sr = new SetResponse(types[i]);
+	    assertNull(sr.getNS());
+	    assertEquals(types[i] == SetResponse.UNKNOWN, sr.isUnknown());
+	    assertEquals(types[i] == SetResponse.NXDOMAIN, sr.isNXDOMAIN());
+	    assertEquals(types[i] == SetResponse.NXRRSET, sr.isNXRRSET());
+	    assertEquals(types[i] == SetResponse.DELEGATION, sr.isDelegation());
+	    assertEquals(types[i] == SetResponse.CNAME, sr.isCNAME());
+	    assertEquals(types[i] == SetResponse.DNAME, sr.isDNAME());
+	    assertEquals(types[i] == SetResponse.SUCCESSFUL, sr.isSuccessful());
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 150 - 170 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SetResponseTest.java
+<pre>
+    public void test_ofType_singleton()
+    {
+	final int[] types = new int[] { SetResponse.UNKNOWN,
+					SetResponse.NXDOMAIN,
+					SetResponse.NXRRSET };
+
+	for(int i=0; i&lt;types.length; ++i){
+	    SetResponse sr = SetResponse.ofType(types[i]);
+	    assertNull(sr.getNS());
+	    assertEquals(types[i] == SetResponse.UNKNOWN, sr.isUnknown());
+	    assertEquals(types[i] == SetResponse.NXDOMAIN, sr.isNXDOMAIN());
+	    assertEquals(types[i] == SetResponse.NXRRSET, sr.isNXRRSET());
+	    assertEquals(types[i] == SetResponse.DELEGATION, sr.isDelegation());
+	    assertEquals(types[i] == SetResponse.CNAME, sr.isCNAME());
+	    assertEquals(types[i] == SetResponse.DNAME, sr.isDNAME());
+	    assertEquals(types[i] == SetResponse.SUCCESSFUL, sr.isSuccessful());
+
+	    SetResponse sr2 = SetResponse.ofType(types[i]);
+	    assertSame(sr, sr2);
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 127 - 148 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SetResponseTest.java
+<pre>
+    public void test_ofType_basic()
+    {
+	final int[] types = new int[] { SetResponse.DELEGATION,
+					SetResponse.CNAME,
+					SetResponse.DNAME,
+					SetResponse.SUCCESSFUL };
+
+	for(int i=0; i&lt;types.length; ++i){
+	    SetResponse sr = SetResponse.ofType(types[i]);
+	    assertNull(sr.getNS());
+	    assertEquals(types[i] == SetResponse.UNKNOWN, sr.isUnknown());
+	    assertEquals(types[i] == SetResponse.NXDOMAIN, sr.isNXDOMAIN());
+	    assertEquals(types[i] == SetResponse.NXRRSET, sr.isNXRRSET());
+	    assertEquals(types[i] == SetResponse.DELEGATION, sr.isDelegation());
+	    assertEquals(types[i] == SetResponse.CNAME, sr.isCNAME());
+	    assertEquals(types[i] == SetResponse.DNAME, sr.isDNAME());
+	    assertEquals(types[i] == SetResponse.SUCCESSFUL, sr.isSuccessful());
+
+	    SetResponse sr2 = SetResponse.ofType(types[i]);
+	    assertNotSame(sr, sr2);
+	}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 85 - 107 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SetResponseTest.java
+<pre>
+    public void test_ctor_2arg()
+    {
+	final int[] types = new int[] { SetResponse.UNKNOWN,
+					SetResponse.NXDOMAIN,
+					SetResponse.NXRRSET,
+					SetResponse.DELEGATION,
+					SetResponse.CNAME,
+					SetResponse.DNAME,
+					SetResponse.SUCCESSFUL };
+
+	for( int i=0; i&lt;types.length; ++i){
+	    RRset rs = new RRset();
+	    SetResponse sr = new SetResponse(types[i], rs);
+	    assertSame(rs, sr.getNS());
+	    assertEquals(types[i] == SetResponse.UNKNOWN, sr.isUnknown());
+	    assertEquals(types[i] == SetResponse.NXDOMAIN, sr.isNXDOMAIN());
+	    assertEquals(types[i] == SetResponse.NXRRSET, sr.isNXRRSET());
+	    assertEquals(types[i] == SetResponse.DELEGATION, sr.isDelegation());
+	    assertEquals(types[i] == SetResponse.CNAME, sr.isCNAME());
+	    assertEquals(types[i] == SetResponse.DNAME, sr.isDNAME());
+	    assertEquals(types[i] == SetResponse.SUCCESSFUL, sr.isSuccessful());
+	}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 45, 2 fragments, nominal size 15 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 67 - 82 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleCompressedNameBaseTest.java
+<pre>
+    public void test_ctor() throws TextParseException
+    {
+	TestClass tc = new TestClass();
+	assertNull(tc.getSingleName());
+
+	Name n = Name.fromString("my.name.");
+	Name sn = Name.fromString("my.single.name.");
+
+	tc = new TestClass(n, Type.A, DClass.IN, 100L, sn, "The Description");
+
+	assertSame(n, tc.getName());
+	assertEquals(Type.A, tc.getType());
+	assertEquals(DClass.IN, tc.getDClass());
+	assertEquals(100L, tc.getTTL());
+	assertSame(sn, tc.getSingleName());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 72 - 94 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleNameBaseTest.java
+<pre>
+    public void test_ctor() throws TextParseException
+    {
+	TestClass tc = new TestClass();
+	assertNull(tc.getSingleName());
+
+	Name n = Name.fromString("my.name.");
+	Name sn = Name.fromString("my.single.name.");
+
+	tc = new TestClass(n, Type.A, DClass.IN, 100L);
+
+	assertSame(n, tc.getName());
+	assertEquals(Type.A, tc.getType());
+	assertEquals(DClass.IN, tc.getDClass());
+	assertEquals(100L, tc.getTTL());
+
+	tc = new TestClass(n, Type.A, DClass.IN, 100L, sn, "The Description");
+
+	assertSame(n, tc.getName());
+	assertEquals(Type.A, tc.getType());
+	assertEquals(DClass.IN, tc.getDClass());
+	assertEquals(100L, tc.getTTL());
+	assertSame(sn, tc.getSingleName());
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 46, 2 fragments, nominal size 16 lines, similarity 100%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 84 - 108 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleCompressedNameBaseTest.java
+<pre>
+    public void test_rrToWire() throws IOException, TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name sn = Name.fromString("My.Single.Name.");
+
+	// non-canonical (case sensitive)
+	TestClass tc = new TestClass(n, Type.A, DClass.IN, 100L, sn, "The Description");
+	byte[] exp = new byte[] { 2, 'M', 'y', 6, 'S', 'i', 'n', 'g', 'l', 'e', 4, 'N', 'a', 'm', 'e', 0 };
+	DNSOutput dout = new DNSOutput();
+	tc.rrToWire(dout, null, false);
+	
+	byte[] out = dout.toByteArray();
+	assertEquals(exp, out);
+
+	// canonical (lowercase)
+	tc = new TestClass(n, Type.A, DClass.IN, 100L, sn, "The Description");
+	exp = new byte[] { 2, 'm', 'y', 6, 's', 'i', 'n', 'g', 'l', 'e', 4, 'n', 'a', 'm', 'e', 0 };
+
+	dout = new DNSOutput();
+	tc.rrToWire(dout, null, true);
+	
+	out = dout.toByteArray();
+	assertEquals(exp, out);
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 139 - 163 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleNameBaseTest.java
+<pre>
+    public void test_rrToWire() throws IOException, TextParseException
+    {
+	Name n = Name.fromString("my.name.");
+	Name sn = Name.fromString("My.Single.Name.");
+
+	// non-canonical (case sensitive)
+	TestClass tc = new TestClass(n, Type.A, DClass.IN, 100L, sn, "The Description");
+	byte[] exp = new byte[] { 2, 'M', 'y', 6, 'S', 'i', 'n', 'g', 'l', 'e', 4, 'N', 'a', 'm', 'e', 0 };
+	DNSOutput dout = new DNSOutput();
+	tc.rrToWire(dout, null, false);
+	
+	byte[] out = dout.toByteArray();
+	assertEquals(exp, out);
+
+	// canonical (lowercase)
+	tc = new TestClass(n, Type.A, DClass.IN, 100L, sn, "The Description");
+	exp = new byte[] { 2, 'm', 'y', 6, 's', 'i', 'n', 'g', 'l', 'e', 4, 'n', 'a', 'm', 'e', 0 };
+
+	dout = new DNSOutput();
+	tc.rrToWire(dout, null, true);
+	
+	out = dout.toByteArray();
+	assertEquals(exp, out);
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 47, 2 fragments, nominal size 13 lines, similarity 76%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 281 - 304 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java
+<pre>
+	public void test() throws IOException
+	{
+	    byte[] raw = new byte[] {
+		1, 'm', 1, 'h', 1, 'n', 0, // host
+		1, 'm', 1, 'a', 1, 'n', 0, // admin
+		(byte)0xAB, (byte)0xCD, (byte)0xEF, (byte)0x12,	   // serial
+		(byte)0xCD, (byte)0xEF, (byte)0x12, (byte)0x34,	   // refresh
+		(byte)0xEF, (byte)0x12, (byte)0x34, (byte)0x56,	   // retry
+		(byte)0x12, (byte)0x34, (byte)0x56, (byte)0x78,	   // expire
+		(byte)0x34, (byte)0x56, (byte)0x78, (byte)0x9A };  // minimum
+
+	    DNSInput di = new DNSInput(raw);
+	    SOARecord ar = new SOARecord();
+	    
+	    ar.rrFromWire(di);
+	    
+	    assertEquals(m_host, ar.getHost());
+	    assertEquals(m_admin, ar.getAdmin());
+	    assertEquals(m_serial, ar.getSerial());
+	    assertEquals(m_refresh, ar.getRefresh());
+	    assertEquals(m_retry, ar.getRetry());
+	    assertEquals(m_expire, ar.getExpire());
+	    assertEquals(m_minimum, ar.getMinimum());
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 325 - 344 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java
+<pre>
+	public void test_valid() throws IOException
+	{
+	    Tokenizer t = new Tokenizer("M.h " + m_admin + " " +
+					m_serial + " " +
+					m_refresh + " " +
+					m_retry + " " +
+					m_expire + " " +
+					m_minimum);
+	    SOARecord ar = new SOARecord();
+	    
+	    ar.rdataFromString(t, m_origin);
+	    
+	    assertEquals(m_host, ar.getHost());
+	    assertEquals(m_admin, ar.getAdmin());
+	    assertEquals(m_serial, ar.getSerial());
+	    assertEquals(m_refresh, ar.getRefresh());
+	    assertEquals(m_retry, ar.getRetry());
+	    assertEquals(m_expire, ar.getExpire());
+	    assertEquals(m_minimum, ar.getMinimum());
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 48, 2 fragments, nominal size 11 lines, similarity 90%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 369 - 380 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java
+<pre>
+	protected void setUp() throws TextParseException
+	{
+	    m_an = Name.fromString("My.absolute.name.");
+	    m_ttl = 0x13A8;
+	    m_host = Name.fromString("M.h.N.");
+	    m_admin = Name.fromString("M.a.n.");
+	    m_serial = 0xABCDEF12L;
+	    m_refresh = 0xCDEF1234L;
+	    m_retry = 0xEF123456L;
+	    m_expire = 0x12345678L;
+	    m_minimum = 0x3456789AL;
+	}
+</pre>
+</td></tr>
+<tr><td>
+Lines 420 - 431 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java
+<pre>
+	protected void setUp() throws TextParseException
+	{
+	    m_an = Name.fromString("My.Abs.Name.");
+	    m_ttl = 0x13A8;
+	    m_host = Name.fromString("M.h.N.");
+	    m_admin = Name.fromString("M.a.n.");
+	    m_serial = 0xABCDEF12L;
+	    m_refresh = 0xCDEF1234L;
+	    m_retry = 0xEF123456L;
+	    m_expire = 0x12345678L;
+	    m_minimum = 0x3456789AL;
+	}
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 49, 2 fragments, nominal size 13 lines, similarity 71%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 296 - 312 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getString() throws IOException
+    {
+	m_t = new Tokenizer("just_an_identifier");
+	String out = m_t.getString();
+	assertEquals("just_an_identifier", out);
+
+	m_t = new Tokenizer("\"just a string\"");
+	out = m_t.getString();
+	assertEquals("just a string", out);
+
+	m_t = new Tokenizer("; just a comment");
+	try {
+	    out = m_t.getString();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 314 - 326 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getIdentifier() throws IOException
+    {
+	m_t = new Tokenizer("just_an_identifier");
+	String out = m_t.getIdentifier();
+	assertEquals("just_an_identifier", out);
+
+	m_t = new Tokenizer("\"just a string\"");
+	try {
+	    m_t.getIdentifier();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 50, 4 fragments, nominal size 17 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 328 - 347 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getLong() throws IOException
+    {
+	m_t = new Tokenizer((Integer.MAX_VALUE+1L) + "");
+	long out = m_t.getLong();
+	assertEquals((Integer.MAX_VALUE+1L), out);
+
+	m_t = new Tokenizer("-10");
+	try {
+	    m_t.getLong();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+
+	m_t = new Tokenizer("19_identifier");
+	try {
+	    m_t.getLong();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 391 - 410 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getUInt8() throws IOException
+    {
+	m_t = new Tokenizer(0xCDL + "");
+	int out = m_t.getUInt8();
+	assertEquals(0xCDL, out);
+
+	m_t = new Tokenizer(0x100 + "");
+	try {
+	    m_t.getUInt8();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+
+	m_t = new Tokenizer("-12");
+	try {
+	    m_t.getUInt8();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 349 - 368 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getUInt32() throws IOException
+    {
+	m_t = new Tokenizer(0xABCDEF12L + "");
+	long out = m_t.getUInt32();
+	assertEquals(0xABCDEF12L, out);
+
+	m_t = new Tokenizer(0x100000000L + "");
+	try {
+	    m_t.getUInt32();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+
+	m_t = new Tokenizer("-12345");
+	try {
+	    m_t.getUInt32();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 370 - 389 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getUInt16() throws IOException
+    {
+	m_t = new Tokenizer(0xABCDL + "");
+	int out = m_t.getUInt16();
+	assertEquals(0xABCDL, out);
+
+	m_t = new Tokenizer(0x10000 + "");
+	try {
+	    m_t.getUInt16();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+
+	m_t = new Tokenizer("-125");
+	try {
+	    m_t.getUInt16();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 51, 2 fragments, nominal size 14 lines, similarity 92%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 412 - 429 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getTTL() throws IOException
+    {
+	m_t = new Tokenizer("59S");
+	assertEquals(59, m_t.getTTL());
+
+	m_t = new Tokenizer(TTL.MAX_VALUE + "");
+	assertEquals(TTL.MAX_VALUE, m_t.getTTL());
+
+	m_t = new Tokenizer((TTL.MAX_VALUE+1L) + "");
+	assertEquals(TTL.MAX_VALUE, m_t.getTTL());
+
+	m_t = new Tokenizer("Junk");
+	try {
+	    m_t.getTTL();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 431 - 448 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getTTLLike() throws IOException
+    {
+	m_t = new Tokenizer("59S");
+	assertEquals(59, m_t.getTTLLike());
+
+	m_t = new Tokenizer(TTL.MAX_VALUE + "");
+	assertEquals(TTL.MAX_VALUE, m_t.getTTLLike());
+
+	m_t = new Tokenizer((TTL.MAX_VALUE+1L) + "");
+	assertEquals(TTL.MAX_VALUE+1L, m_t.getTTLLike());
+
+	m_t = new Tokenizer("Junk");
+	try {
+	    m_t.getTTLLike();
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 52, 2 fragments, nominal size 32 lines, similarity 81%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 502 - 545 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getBase64() throws IOException
+    {
+	byte[] exp = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	// basic
+	m_t = new Tokenizer("AQIDBAUGBwgJ");
+	byte[] out = m_t.getBase64();
+	assertEquals(exp, out);
+
+	// with some whitespace
+	m_t = new Tokenizer("AQIDB AUGB   wgJ");
+	out = m_t.getBase64();
+	assertEquals(exp, out);
+
+	// two base64s separated by newline
+	m_t = new Tokenizer("AQIDBAUGBwgJ\nAB23DK");
+	out = m_t.getBase64();
+	assertEquals(exp, out);
+
+	// no remaining strings
+	m_t = new Tokenizer("\n");
+	assertNull( m_t.getBase64() );
+
+	m_t = new Tokenizer("\n");
+	try {
+	    m_t.getBase64(true);
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+
+	// invalid encoding
+	m_t = new Tokenizer("not_base64");
+	try {
+	    m_t.getBase64(false);
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+
+	m_t = new Tokenizer("not_base64");
+	try {
+	    m_t.getBase64(true);
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 547 - 590 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java
+<pre>
+    public void test_getHex() throws IOException
+    {
+	byte[] exp = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+	// basic
+	m_t = new Tokenizer("0102030405060708090A0B0C0D0E0F");
+	byte[] out = m_t.getHex();
+	assertEquals(exp, out);
+
+	// with some whitespace
+	m_t = new Tokenizer("0102030 405 060708090A0B0C      0D0E0F");
+	out = m_t.getHex();
+	assertEquals(exp, out);
+
+	// two hexs separated by newline
+	m_t = new Tokenizer("0102030405060708090A0B0C0D0E0F\n01AB3FE");
+	out = m_t.getHex();
+	assertEquals(exp, out);
+
+	// no remaining strings
+	m_t = new Tokenizer("\n");
+	assertNull( m_t.getHex() );
+
+	m_t = new Tokenizer("\n");
+	try {
+	    m_t.getHex(true);
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+
+	// invalid encoding
+	m_t = new Tokenizer("not_hex");
+	try {
+	    m_t.getHex(false);
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+
+	m_t = new Tokenizer("not_hex");
+	try {
+	    m_t.getHex(true);
+	    fail("TextParseException not thrown");
+	}
+	catch( TextParseException e ){}
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 53, 2 fragments, nominal size 22 lines, similarity 79%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 25 - 49 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TSIGTest.java
+<pre>
+    public void test_TSIG_response() throws TextParseException, IOException
+    {
+	TSIG key = new TSIG(TSIG.HMAC_SHA256, "example.", "12345678");
+
+	Name qname = Name.fromString("www.example.");
+	Record question = Record.newRecord(qname, Type.A, DClass.IN);
+	Message query = Message.newQuery(question);
+	query.setTSIG(key, Rcode.NOERROR, null);
+	byte [] qbytes = query.toWire();
+	Message qparsed = new Message(qbytes);
+
+	Message response = new Message(query.getHeader().getID());
+	response.setTSIG(key, Rcode.NOERROR, qparsed.getTSIG());
+	response.getHeader().setFlag(Flags.QR);
+	response.addRecord(question, Section.QUESTION);
+	Record answer = Record.fromString(qname, Type.A, DClass.IN, 300,
+					  "1.2.3.4", null);
+	response.addRecord(answer, Section.ANSWER);
+	byte [] bytes = response.toWire(512);
+
+	Message parsed = new Message(bytes);
+	int result = key.verify(parsed, bytes, qparsed.getTSIG());
+	assertEquals(result, Rcode.NOERROR);
+	assertTrue(parsed.isSigned());
+    }
+</pre>
+</td></tr>
+<tr><td>
+Lines 51 - 78 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TSIGTest.java
+<pre>
+    public void test_TSIG_truncated() throws TextParseException, IOException
+    {
+	TSIG key = new TSIG(TSIG.HMAC_SHA256, "example.", "12345678");
+
+	Name qname = Name.fromString("www.example.");
+	Record question = Record.newRecord(qname, Type.A, DClass.IN);
+	Message query = Message.newQuery(question);
+	query.setTSIG(key, Rcode.NOERROR, null);
+	byte [] qbytes = query.toWire();
+        Message qparsed = new Message(qbytes);
+
+	Message response = new Message(query.getHeader().getID());
+	response.setTSIG(key, Rcode.NOERROR, qparsed.getTSIG());
+	response.getHeader().setFlag(Flags.QR);
+	response.addRecord(question, Section.QUESTION);
+	for (int i = 0; i &lt; 40; i++) {
+		Record answer = Record.fromString(qname, Type.TXT, DClass.IN,
+						  300, "foo" + i, null);
+		response.addRecord(answer, Section.ANSWER);
+	}
+	byte [] bytes = response.toWire(512);
+
+	Message parsed = new Message(bytes);
+	assertTrue(parsed.getHeader().getFlag(Flags.TC));
+	int result = key.verify(parsed, bytes, qparsed.getTSIG());
+	assertEquals(result, Rcode.NOERROR);
+	assertTrue(parsed.isSigned());
+    }
+</pre>
+</td></tr>
+</table>
+<h3>Clone class 54, 2 fragments, nominal size 22 lines, similarity 70%
+</h3>
+<table cellpadding=12 border=2 frame="box" width="90%">
+<tr><td>
+Lines 316 - 342 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/update.java
+<pre>
+void
+doRequire(Tokenizer st) throws IOException {
+	Tokenizer.Token token;
+	Name name;
+	Record record;
+	int type;
+
+	name = st.getName(zone);
+	token = st.get();
+	if (token.isString()) {
+		if ((type = Type.value(token.value)) &lt; 0)
+			throw new IOException("Invalid type: " + token.value);
+		token = st.get();
+		boolean iseol = token.isEOL();
+		st.unget();
+		if (!iseol) {
+			record = Record.fromString(name, type, defaultClass,
+						   0, st, zone);
+		} else
+			record = Record.newRecord(name, type,
+						  DClass.ANY, 0);
+	} else
+		record = Record.newRecord(name, Type.ANY, DClass.ANY, 0);
+
+	query.addRecord(record, Section.PREREQ);
+	print(record);
+}
+</pre>
+</td></tr>
+<tr><td>
+Lines 370 - 401 of systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/update.java
+<pre>
+void
+doDelete(Tokenizer st) throws IOException {
+	Tokenizer.Token token;
+	String s;
+	Name name;
+	Record record;
+	int type;
+
+	name = st.getName(zone);
+	token = st.get();
+	if (token.isString()) {
+		s = token.value;
+		if (DClass.value(s) &gt;= 0) {
+			s = st.getString();
+		}
+		if ((type = Type.value(s)) &lt; 0)
+			throw new IOException("Invalid type: " + s);
+		token = st.get();
+		boolean iseol = token.isEOL();
+		st.unget();
+		if (!iseol) {
+			record = Record.fromString(name, type, DClass.NONE,
+						   0, st, zone);
+		} else
+			record = Record.newRecord(name, type, DClass.ANY, 0);
+	}
+	else
+		record = Record.newRecord(name, Type.ANY, DClass.ANY, 0);
+
+	query.addRecord(record, Section.UPDATE);
+	print(record);
+}
+</pre>
+</td></tr>
+</table>
+</body>
+</html>

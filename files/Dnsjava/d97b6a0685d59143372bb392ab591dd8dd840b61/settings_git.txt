@@ -1,0 +1,6 @@
+#REPO_PATH_URI:#
+https://github.com/dnsjava/dnsjava.git
+#REPO_LOCAL_PATH:#
+.\repo_4G1\
+#SYSTEM_NAME:#
+Dnsjava

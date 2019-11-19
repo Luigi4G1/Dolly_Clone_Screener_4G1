@@ -1,0 +1,324 @@
+<clones>
+<systeminfo processor="nicad5" system="Dnsjava" granularity="functions-blind" threshold="30%" minlines="10" maxlines="2500"/>
+<cloneinfo npcs="2183" npairs="217"/>
+<runinfo ncompares="70412" cputime="61"/>
+<classinfo nclasses="54"/>
+
+<class classid="1" nclones="2" nlines="10" similarity="100">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/jnamed.java" startline="602" endline="608" pcid="30"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/jnamed.java" startline="610" endline="616" pcid="32"></source>
+</class>
+
+<class classid="2" nclones="3" nlines="10" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/CAARecord.java" startline="41" endline="53" pcid="108"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/GPOSRecord.java" startline="64" endline="78" pcid="414"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/URIRecord.java" startline="39" endline="52" pcid="1334"></source>
+</class>
+
+<class classid="3" nclones="2" nlines="30" similarity="96">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Cache.java" startline="257" endline="286" pcid="139"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Zone.java" startline="272" endline="303" pcid="1404"></source>
+</class>
+
+<class classid="4" nclones="2" nlines="22" similarity="100">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Cache.java" startline="288" endline="311" pcid="140"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Zone.java" startline="305" endline="328" pcid="1405"></source>
+</class>
+
+<class classid="5" nclones="6" nlines="15" similarity="72">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/CERTRecord.java" startline="164" endline="182" pcid="172"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/KEYBase.java" startline="49" endline="69" pcid="492"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/DSRecord.java" startline="103" endline="117" pcid="338"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/DLVRecord.java" startline="74" endline="88" pcid="222"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/SMIMEARecord.java" startline="112" endline="124" pcid="1065"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/TLSARecord.java" startline="110" endline="122" pcid="1157"></source>
+</class>
+
+<class classid="6" nclones="2" nlines="23" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/IPSECKEYRecord.java" startline="98" endline="121" pcid="471"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/IPSECKEYRecord.java" startline="123" endline="148" pcid="472"></source>
+</class>
+
+<class classid="7" nclones="2" nlines="10" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Lookup.java" startline="170" endline="180" pcid="543"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Lookup.java" startline="339" endline="349" pcid="554"></source>
+</class>
+
+<class classid="8" nclones="2" nlines="13" similarity="85">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/NSEC3PARAMRecord.java" startline="92" endline="108" pcid="750"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/NSEC3Record.java" startline="137" endline="155" pcid="764"></source>
+</class>
+
+<class classid="9" nclones="2" nlines="11" similarity="72">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/TCPClient.java" startline="113" endline="128" pcid="1126"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/UDPClient.java" startline="142" endline="157" pcid="1295"></source>
+</class>
+
+<class classid="10" nclones="2" nlines="10" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/TKEYRecord.java" startline="63" endline="76" pcid="1136"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/TSIGRecord.java" startline="53" endline="66" pcid="1227"></source>
+</class>
+
+<class classid="11" nclones="2" nlines="10" similarity="80">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Tokenizer.java" startline="606" endline="619" pcid="1194"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/org/xbill/DNS/Tokenizer.java" startline="644" endline="657" pcid="1196"></source>
+</class>
+
+<class classid="12" nclones="2" nlines="20" similarity="95">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AAAARecordTest.java" startline="79" endline="103" pcid="1467"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/ARecordTest.java" startline="79" endline="103" pcid="1540"></source>
+</class>
+
+<class classid="13" nclones="4" nlines="14" similarity="71">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AAAARecordTest.java" startline="115" endline="132" pcid="1469"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleNameBaseTest.java" startline="108" endline="124" pcid="2008"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/ARecordTest.java" startline="115" endline="132" pcid="1542"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/U16NameBaseTest.java" startline="154" endline="172" pcid="2089"></source>
+</class>
+
+<class classid="14" nclones="2" nlines="12" similarity="100">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AddressTest.java" startline="282" endline="296" pcid="1485"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AddressTest.java" startline="316" endline="330" pcid="1487"></source>
+</class>
+
+<class classid="15" nclones="4" nlines="11" similarity="91">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/AFSDBRecordTest.java" startline="49" endline="61" pcid="1491"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/KXRecordTest.java" startline="49" endline="62" pcid="1732"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MXRecordTest.java" startline="49" endline="62" pcid="1764"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RTRecordTest.java" startline="49" endline="61" pcid="1960"></source>
+</class>
+
+<class classid="16" nclones="3" nlines="16" similarity="100">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="111" endline="131" pcid="1497"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="526" endline="546" pcid="1527"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="568" endline="588" pcid="1529"></source>
+</class>
+
+<class classid="17" nclones="2" nlines="10" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="219" endline="234" pcid="1506"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="266" endline="284" pcid="1509"></source>
+</class>
+
+<class classid="18" nclones="6" nlines="10" similarity="90">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="236" endline="249" pcid="1507"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="251" endline="264" pcid="1508"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java" startline="267" endline="280" pcid="1673"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java" startline="282" endline="295" pcid="1674"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java" startline="252" endline="265" pcid="1672"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java" startline="237" endline="250" pcid="1671"></source>
+</class>
+
+<class classid="19" nclones="3" nlines="10" similarity="80">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="637" endline="651" pcid="1533"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="669" endline="683" pcid="1535"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="653" endline="667" pcid="1534"></source>
+</class>
+
+<class classid="20" nclones="2" nlines="11" similarity="90">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/APLRecordTest.java" startline="686" endline="696" pcid="1536"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="1238" endline="1249" pcid="1876"></source>
+</class>
+
+<class classid="21" nclones="9" nlines="11" similarity="90">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/CNAMERecordTest.java" startline="49" endline="61" pcid="1546"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MBRecordTest.java" startline="49" endline="61" pcid="1734"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNAMERecordTest.java" startline="49" endline="61" pcid="1553"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MRRecordTest.java" startline="48" endline="59" pcid="1761"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MDRecordTest.java" startline="49" endline="61" pcid="1737"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NSRecordTest.java" startline="49" endline="61" pcid="1881"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MFRecordTest.java" startline="49" endline="61" pcid="1744"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NSAP_PTRRecordTest.java" startline="48" endline="59" pcid="1878"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MGRecordTest.java" startline="48" endline="59" pcid="1747"></source>
+</class>
+
+<class classid="22" nclones="15" nlines="13" similarity="71">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DClassTest.java" startline="41" endline="66" pcid="1550"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SectionTest.java" startline="41" endline="60" pcid="1961"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/FlagsTest.java" startline="41" endline="63" pcid="1649"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java" startline="291" endline="305" pcid="1696"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RcodeTest.java" startline="68" endline="90" pcid="1898"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java" startline="261" endline="275" pcid="1694"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/ExtendedFlagsTest.java" startline="41" endline="63" pcid="1647"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/OpcodeTest.java" startline="41" endline="63" pcid="1883"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RcodeTest.java" startline="41" endline="66" pcid="1897"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SectionTest.java" startline="82" endline="88" pcid="1964"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SectionTest.java" startline="74" endline="80" pcid="1963"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/KEYRecordTest.java" startline="90" endline="108" pcid="1727"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java" startline="231" endline="245" pcid="1692"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java" startline="335" endline="341" pcid="1699"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TTLTest.java" startline="113" endline="120" pcid="2070"></source>
+</class>
+
+<class classid="23" nclones="5" nlines="12" similarity="75">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSKEYRecordTest.java" startline="45" endline="57" pcid="1581"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/KEYRecordTest.java" startline="45" endline="57" pcid="1724"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java" startline="45" endline="56" pcid="1617"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java" startline="79" endline="93" pcid="2014"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/URIRecordTest.java" startline="10" endline="20" pcid="2092"></source>
+</class>
+
+<class classid="24" nclones="2" nlines="19" similarity="100">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSKEYRecordTest.java" startline="66" endline="88" pcid="1583"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/KEYRecordTest.java" startline="66" endline="88" pcid="1726"></source>
+</class>
+
+<class classid="25" nclones="2" nlines="15" similarity="80">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSSECWithLunaProviderTest.java" startline="38" endline="57" pcid="1611"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSSECWithProviderTest.java" startline="26" endline="45" pcid="1616"></source>
+</class>
+
+<class classid="26" nclones="2" nlines="12" similarity="75">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSSECWithLunaProviderTest.java" startline="59" endline="74" pcid="1612"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DNSSECWithLunaProviderTest.java" startline="76" endline="91" pcid="1613"></source>
+</class>
+
+<class classid="27" nclones="2" nlines="11" similarity="72">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java" startline="84" endline="96" pcid="1620"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java" startline="158" endline="170" pcid="1627"></source>
+</class>
+
+<class classid="28" nclones="2" nlines="10" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java" startline="173" endline="187" pcid="1628"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/DSRecordTest.java" startline="189" endline="203" pcid="1629"></source>
+</class>
+
+<class classid="29" nclones="2" nlines="13" similarity="92">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java" startline="76" endline="90" pcid="1658"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/GPOSRecordTest.java" startline="159" endline="175" pcid="1665"></source>
+</class>
+
+<class classid="30" nclones="2" nlines="15" similarity="86">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java" startline="55" endline="69" pcid="1685"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HeaderTest.java" startline="71" endline="86" pcid="1686"></source>
+</class>
+
+<class classid="31" nclones="2" nlines="11" similarity="81">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HINFORecordTest.java" startline="75" endline="87" pcid="1707"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HINFORecordTest.java" startline="89" endline="101" pcid="1708"></source>
+</class>
+
+<class classid="32" nclones="2" nlines="11" similarity="72">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HINFORecordTest.java" startline="132" endline="145" pcid="1711"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/HINFORecordTest.java" startline="147" endline="159" pcid="1712"></source>
+</class>
+
+<class classid="33" nclones="2" nlines="18" similarity="88">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MessageTest.java" startline="48" endline="65" pcid="1739"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MessageTest.java" startline="67" endline="85" pcid="1740"></source>
+</class>
+
+<class classid="34" nclones="3" nlines="23" similarity="82">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MnemonicTest.java" startline="136" endline="167" pcid="1755"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MnemonicTest.java" startline="169" endline="200" pcid="1756"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MnemonicTest.java" startline="248" endline="283" pcid="1759"></source>
+</class>
+
+<class classid="35" nclones="2" nlines="15" similarity="86">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/MXRecordTest.java" startline="64" endline="84" pcid="1765"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/U16NameBaseTest.java" startline="189" endline="211" pcid="2091"></source>
+</class>
+
+<class classid="36" nclones="4" nlines="15" similarity="73">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="110" endline="129" pcid="1773"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="227" endline="246" pcid="1779"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="206" endline="225" pcid="1778"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="248" endline="267" pcid="1780"></source>
+</class>
+
+<class classid="37" nclones="2" nlines="13" similarity="76">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="278" endline="295" pcid="1782"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="392" endline="408" pcid="1793"></source>
+</class>
+
+<class classid="38" nclones="2" nlines="11" similarity="81">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="633" endline="647" pcid="1816"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="649" endline="663" pcid="1817"></source>
+</class>
+
+<class classid="39" nclones="3" nlines="12" similarity="75">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="960" endline="974" pcid="1849"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="1002" endline="1016" pcid="1853"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/NameTest.java" startline="1055" endline="1069" pcid="1858"></source>
+</class>
+
+<class classid="40" nclones="2" nlines="18" similarity="77">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java" startline="151" endline="170" pcid="1914"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java" startline="172" endline="192" pcid="1915"></source>
+</class>
+
+<class classid="41" nclones="2" nlines="15" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java" startline="417" endline="441" pcid="1922"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java" startline="443" endline="460" pcid="1923"></source>
+</class>
+
+<class classid="42" nclones="3" nlines="15" similarity="80">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java" startline="890" endline="899" pcid="1941"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java" startline="901" endline="910" pcid="1942"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RecordTest.java" startline="912" endline="921" pcid="1943"></source>
+</class>
+
+<class classid="43" nclones="2" nlines="15" similarity="73">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RRsetTest.java" startline="285" endline="302" pcid="1957"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/RRsetTest.java" startline="304" endline="320" pcid="1958"></source>
+</class>
+
+<class classid="44" nclones="4" nlines="16" similarity="76">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SetResponseTest.java" startline="44" endline="65" pcid="1977"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SetResponseTest.java" startline="150" endline="170" pcid="1984"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SetResponseTest.java" startline="127" endline="148" pcid="1983"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SetResponseTest.java" startline="85" endline="107" pcid="1980"></source>
+</class>
+
+<class classid="45" nclones="2" nlines="15" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleCompressedNameBaseTest.java" startline="67" endline="82" pcid="1998"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleNameBaseTest.java" startline="72" endline="94" pcid="2006"></source>
+</class>
+
+<class classid="46" nclones="2" nlines="16" similarity="100">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleCompressedNameBaseTest.java" startline="84" endline="108" pcid="1999"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SingleNameBaseTest.java" startline="139" endline="163" pcid="2010"></source>
+</class>
+
+<class classid="47" nclones="2" nlines="13" similarity="76">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java" startline="281" endline="304" pcid="2031"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java" startline="325" endline="344" pcid="2033"></source>
+</class>
+
+<class classid="48" nclones="2" nlines="11" similarity="90">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java" startline="369" endline="380" pcid="2035"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/SOARecordTest.java" startline="420" endline="431" pcid="2038"></source>
+</class>
+
+<class classid="49" nclones="2" nlines="13" similarity="71">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="296" endline="312" pcid="2052"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="314" endline="326" pcid="2053"></source>
+</class>
+
+<class classid="50" nclones="4" nlines="17" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="328" endline="347" pcid="2054"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="391" endline="410" pcid="2057"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="349" endline="368" pcid="2055"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="370" endline="389" pcid="2056"></source>
+</class>
+
+<class classid="51" nclones="2" nlines="14" similarity="92">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="412" endline="429" pcid="2058"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="431" endline="448" pcid="2059"></source>
+</class>
+
+<class classid="52" nclones="2" nlines="32" similarity="81">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="502" endline="545" pcid="2062"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TokenizerTest.java" startline="547" endline="590" pcid="2063"></source>
+</class>
+
+<class classid="53" nclones="2" nlines="22" similarity="79">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TSIGTest.java" startline="25" endline="49" pcid="2065"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/tests/org/xbill/DNS/TSIGTest.java" startline="51" endline="78" pcid="2066"></source>
+</class>
+
+<class classid="54" nclones="2" nlines="22" similarity="70">
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/update.java" startline="316" endline="342" pcid="2173"></source>
+<source file="systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava/update.java" startline="370" endline="401" pcid="2176"></source>
+</class>
+
+</clones>
