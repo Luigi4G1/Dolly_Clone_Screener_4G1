@@ -98,4 +98,10 @@ E) DEPENDENCIES:
 F) RUN:
 	- MAIN CLASS GUI STARTER:
 		view.Splash_Screen (PACKAGE view, class Splash_Screen)
-		
+	NOTE: if you create a RUNNABLE JAR, you need to have the following files in the same directory as the .jar file, if you want to load previous analysis:
+		- settings.txt FILE (LAST SAVED SYSTEM ANALYSIS)
+		- /saves/ FOLDER (SAVED SYSTEM ANALYSIS)
+		- /files/ FOLDER (SAVED SYSTEM ANALYSIS SETTINGS, at least settings_git.txt and settings_nicad.txt inside a /files/system_name/system_version/ FOLDER, SEE EXAMPLES)
+		- (OPTIONAL) /libraries/ FOLDER (DEPENDENCIES, SEE ABOVE, if you choose to create the .jar FILE without packaging the required libraries into generated JAR)
+
+ENJOY IT and SPREAD the KNOWLEDGE!	
