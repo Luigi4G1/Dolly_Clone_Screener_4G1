@@ -85,7 +85,7 @@ D) NiCad SETTINGS:
 				EX.:	./nicad5 functions java systems/Dnsjava/d97b6a0685d59143372bb392ab591dd8dd840b61/Dnsjava default-report
 		3- NOTE: FOR MORE INFO on the AVAILABLE OPTIONS, check NiCad README files.
 E) DEPENDENCIES:
-	- This projects was developped with Eclipse IDE, using JDK 1.8
+	- This projects was developped with Eclipse IDE, using JDK 1.8.0_202
 	- ADDITIONAL LIBRARIES:
 		This software needs the following libraries linked to compile/run:
 			1- JGit: org.eclipse.jgit-5.3.0.201903130848-r.jar
@@ -95,4 +95,7 @@ E) DEPENDENCIES:
 			5- jsch: jsch-0.1.55.jar
 		For example, you can create a folder /libraries/ where to put those .jar files and link them to your classpath.
 		Or you can use Maven Repository, as well.
+F) RUN:
+	- MAIN CLASS GUI STARTER:
+		view.Splash_Screen (PACKAGE view, class Splash_Screen)
 		

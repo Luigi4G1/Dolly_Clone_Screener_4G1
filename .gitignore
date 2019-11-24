@@ -1,7 +1,7 @@
 # local libraries
 .libraries/
 
-# Saved systems clone introducers analysis -> too big data
+# Saved systems clone introducers analysis 
 ./saves/Tika
 
 .metadata
